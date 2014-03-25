@@ -1,0 +1,49 @@
+<footer id="footer">
+			<?php
+			if($this->router->fetch_class() === $this->router->default_controller) { // only show map on main pages ?>
+			<div id="map_canvas"></div>
+			<?php } ?>
+			
+			<div class="footer">
+				<div class="container box">
+
+					<section id="info" class="row">
+						<div class="col-sm-8">
+
+							<!--== Social Icons ==-->
+							<ul class="social-icons">
+								<li><a href="#" class="fa fa-facebook"></a></li>
+								<li><a href="#" class="fa fa-twitter"></a></li>
+								<li><a href="#" class="fa fa-google-plus"></a></li>
+								<li><a href="#" class="fa fa-youtube"></a></li>
+								<li><a href="#" class="fa fa-instagram"></a></li>
+								<li><a href="#" class="fa fa-pinterest"></a></li>
+								<li><a href="#" class="fa fa-linkedin"></a></li>
+							</ul>
+
+						</div>
+						<div class="col-sm-4 text-right">
+							<div class="copyrights">
+								<?php echo $this->lang->line('site_copyright_footer'); ?>
+							</div>
+						</div>
+					</section>
+
+				</div>
+			</div>
+		</footer>
+
+		<!--== Javascript Files ==-->
+		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script src="<?php echo base_url(); ?>js/jquery-2.1.0.min.js"></script>
+		<script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
+		<script src="<?php echo base_url(); ?>js/jquery.scrollTo.js"></script>
+		<script src="<?php echo base_url(); ?>js/jquery.nav.js"></script>
+		<script src="<?php echo base_url(); ?>js/owl.carousel.min.js"></script>
+		<script src="<?php echo base_url(); ?>js/jquery.flexslider.js"></script>
+		<script src="<?php echo base_url(); ?>js/jquery.accordion.js"></script>
+		<script src="<?php echo base_url(); ?>js/jquery.placeholder.js"></script>
+		<script src="<?php echo base_url(); ?>js/jquery.fitvids.js"></script>
+		<script src="<?php echo base_url(); ?>js/gmap3.js"></script>
+		<script src="<?php echo base_url(); ?>js/fancySelect.js"></script>
+		<script src="<?php echo base_url(); ?>js/main.js"></script>

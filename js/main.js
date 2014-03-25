@@ -2,7 +2,8 @@
     "use strict";
 
     ///////////////////////////////////////////////////// Your
-    var venueAddress = "Grand Place, 1000, Brussels"; // Venue
+    var venueAddress = "142 Market Street, Tottington, Bury, BL8 3LS, UK"; // Venue
+    var venueTitle = "We are here";
     /////////////////////////////////////////////////// Adress
 
     var fn = {
@@ -26,7 +27,7 @@
         // Google Maps
         GoogleMaps: function () {
 
-            var markerInfo = "<h4>" + venueAddress + "</h4>";
+            var markerInfo = "<h4>" + venueTitle + "</h4>";
             $("#map_canvas").gmap3({
                 map: {
                     options: {
