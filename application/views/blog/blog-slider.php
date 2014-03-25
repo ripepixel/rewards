@@ -17,8 +17,8 @@
 
 					<!--== Main Slider ==-->
 					<ul class="slides">
-						<li><img src="<?php echo base_url(); ?>images/home-slides/bg-slide-01.jpg" alt="Slide Image"/></li>
-						<li><img src="<?php echo base_url(); ?>images/home-slides/bg-slide-02.jpg" alt="Slide Image 2"/></li>
+						<li><img src="<?php echo base_url(); ?>images/home-slides/bg-slide-02.jpg" alt="Slide Image"/></li>
+						<!-- <li><img src="<?php echo base_url(); ?>images/home-slides/bg-slide-02.jpg" alt="Slide Image 2"/></li> -->
 					</ul>
 
 				</div>
