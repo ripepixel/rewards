@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 25, 2014 at 04:36 PM
+-- Generation Time: Mar 26, 2014 at 04:30 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -28,7 +28,14 @@ CREATE TABLE IF NOT EXISTS `blog_categories` (
   `slug` varchar(255) NOT NULL,
   `order` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `blog_categories`
+--
+
+INSERT INTO `blog_categories` (`id`, `name`, `slug`, `order`) VALUES
+(1, 'News', 'news', 1);
 
 -- --------------------------------------------------------
 
@@ -126,6 +133,30 @@ CREATE TABLE IF NOT EXISTS `outlet_settings` (
   `min_checkin_period` int(3) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `plans`
+--
+
+CREATE TABLE IF NOT EXISTS `plans` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `setup_fee` decimal(8,2) NOT NULL,
+  `price` decimal(8,2) NOT NULL,
+  `active` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `plans`
+--
+
+INSERT INTO `plans` (`id`, `title`, `setup_fee`, `price`, `active`) VALUES
+(1, 'App Only', '0.00', '9.99', 1),
+(2, 'Basic', '0.00', '24.99', 1),
+(3, 'Pro', '0.00', '29.99', 1);
 
 -- --------------------------------------------------------
 

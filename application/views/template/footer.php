@@ -16,9 +16,6 @@
 								<li><a href="#" class="fa fa-twitter"></a></li>
 								<li><a href="#" class="fa fa-google-plus"></a></li>
 								<li><a href="#" class="fa fa-youtube"></a></li>
-								<li><a href="#" class="fa fa-instagram"></a></li>
-								<li><a href="#" class="fa fa-pinterest"></a></li>
-								<li><a href="#" class="fa fa-linkedin"></a></li>
 							</ul>
 
 						</div>

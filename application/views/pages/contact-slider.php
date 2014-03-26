@@ -3,10 +3,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="blk">
-							<?php $title = isset($slider_title) ? $slider_title : $this->lang->line('site_blog_heading'); ?>
-							<h1><?php echo $title; ?></h1>
+							<h1>Have a Question?<br />Get in Touch</h1>
 						</div>
-					</div>>
+					</div>
 				</div>
 			</div>
 
@@ -18,8 +17,8 @@
 
 					<!--== Main Slider ==-->
 					<ul class="slides">
-						<li><img src="<?php echo base_url(); ?>images/home-slides/bg-slide-02.jpg" alt="Slide Image"/></li>
-						<!-- <li><img src="<?php echo base_url(); ?>images/home-slides/bg-slide-02.jpg" alt="Slide Image 2"/></li> -->
+						<li><img src="<?php echo base_url(); ?>images/home-slides/bg-slide-01.jpg" alt="Slide Image"/></li>
+						<li><img src="<?php echo base_url(); ?>images/home-slides/bg-slide-02.jpg" alt="Slide Image 2"/></li>
 					</ul>
 
 				</div>

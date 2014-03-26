@@ -358,5 +358,16 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 
+/*
+|--------------------------------------------------------------------------
+| Email Config
+|--------------------------------------------------------------------------
+|
+*/
+
+$config['smtp_host'] = "mail.how-media.co.uk";
+$config['smtp_user'] = "contact@how-media.co.uk";
+$config['smtp_pass'] = "Georgian99?";
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

@@ -20,14 +20,14 @@
 					<div class="navbar-collapse collapse">
 						<!--== Navigation Menu ==-->
 						<ul class="nav navbar-nav">
-							<li class="current"><a href="<?php echo base_url(); ?>">Home</a></li>
-							<li><a href="#schedule">Schedule</a></li>
-							<li><a href="#subscribe">Subscribe</a></li>
-							<li><a href="#speakers">Speakers</a></li>
-							<li><a href="#faq">FAQ</a></li>
-							<li><a href="#prices">Pricing</a></li>
+							<li><a href="<?php echo base_url(); ?>">Home</a></li>
+							<li><a href="<?php echo base_url(); ?>#schedule">Schedule</a></li>
+							<li><a href="<?php echo base_url(); ?>#faq">FAQ</a></li>
+							<li><a href="<?php echo base_url(); ?>#prices">Pricing</a></li>
 							<li><a href="<?php echo base_url(); ?>blog/">Blog</a></li>
-							<li><a href="#register">Register</a></li>
+							<li><a href="<?php echo base_url(); ?>pages/contact">Contact</a></li>
+							<li class="current"><a href="<?php echo base_url(); ?>#register">Register</a></li>
+							<li class="signin"><a href="<?php echo base_url(); ?>#register">Signin</a></li>
 						</ul>
 					</div>
 				</nav>

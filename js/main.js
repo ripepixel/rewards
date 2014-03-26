@@ -1,10 +1,10 @@
 (function ($) {
     "use strict";
 
-    ///////////////////////////////////////////////////// Your
-    var venueAddress = "142 Market Street, Tottington, Bury, BL8 3LS, UK"; // Venue
-    var venueTitle = "We are here";
-    /////////////////////////////////////////////////// Adress
+    
+    var venueAddress = "142 Market Street, Tottington, Bury, BL8 3LS, UK";
+    var venueTitle = "Get Rewards Here";
+    
 
     var fn = {
 
@@ -18,6 +18,7 @@
             fn.Carousel();
             fn.Slider();
             fn.RegisterForm();
+            fn.ContactForm();
             fn.SubscribeForm();
             fn.Apps();
         },
@@ -112,7 +113,7 @@
 
         // One Page Navigation
         Navigation: function () {
-            $('#menu').onePageNav({
+            $('#gotop').onePageNav({
                 currentClass: 'current',
                 scrollSpeed: 500,
                 scrollOffset: 60,
@@ -163,11 +164,12 @@
         RegisterForm: function () {
             $("#register-form").submit(function (e) {
                 e.preventDefault();
-                var name = $("#name").val(),
+                var //name = $("#name").val(),
                     email = $("#email").val(),
-                    telephone = $("#telephone").val(),
-                    ticket = $("#ticket").val(),
-                    dataString = 'name=' + name + '&email=' + email + '&telephone=' + telephone + '&ticket=' + ticket;
+                    password = $("#password").val(),
+                    plan = $("#plan").val(),
+                    dataString = 'email=' + email + '&password=' + password + '&plan=' + plan;
+                    //dataString = 'name=' + name + '&email=' + email + '&password=' + password + '&plan=' + plan;
                 function isValidEmail(emailAddress) {
                     var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
                     return pattern.test(emailAddress);
@@ -188,10 +190,54 @@
                     } else {
                         $('input#email').removeClass('not-valid');
                     }
+                    if (password.length === 0) {
+                        $('input#password').addClass('not-valid');
+                    } else {
+                        $('input#password').removeClass('not-valid');
+                    }
+                }
+                return false;
+            });
+        },
+
+        // Registration Form
+        ContactForm: function () {
+            $("#contact-form").submit(function (e) {
+                e.preventDefault();
+                var name = $("#name").val(),
+                    email = $("#email").val(),
+                    telephone = $("#telephone").val(),
+                    message = $("#message").val(),
+                    dataString = 'name=' + name + '&email=' + email + '&telephone=' + telephone + '&message=' + message;
+                function isValidEmail(emailAddress) {
+                    var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+                    return pattern.test(emailAddress);
+                }
+
+                if (isValidEmail(email) && (name.length > 1) && (message.length > 1)) {
+                    $.ajax({
+                        type: "POST",
+                        url: "submit_contact",
+                        data: dataString,
+                        success: function () {
+                            $('#contact-form .form-notification').fadeIn(500);
+                        }
+                    });
+                } else {
+                    if (!isValidEmail(email)) {
+                        $('input#email').addClass('not-valid');
+                    } else {
+                        $('input#email').removeClass('not-valid');
+                    }
                     if (name.length === 0) {
                         $('input#name').addClass('not-valid');
                     } else {
                         $('input#name').removeClass('not-valid');
+                    }
+                    if (message.length === 0) {
+                        $('textarea#message').addClass('not-valid');
+                    } else {
+                        $('textarea#message').removeClass('not-valid');
                     }
                 }
                 return false;

@@ -168,62 +168,6 @@
 					</div>
 				</section>
 				<!--==========-->
-
-				
-
-				<!--===============================-->
-				<!--== Image Slider ===============-->
-				<!--===============================-->
-				<section id="image-slider" class="row">
-					<div class="col-sm-12">
-						<div class="section-header text-right">
-							<h2>Photos</h2>
-							<h4>Awesome section description goes here.</h4>
-						</div>
-					</div>
-					<div class="col-md-5 col-sm-12">
-						<h3>Lorem ipsum</h3>
-						<h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, quos, ratione, optio, blanditiis deserunt saepe iure sunt odit atque eius voluptatum labore excepturi explicabo aliquid sapiente porro voluptas commodi sint?</h4>
-						<blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, quas, quibusdam, impedit ducimus nisi fugiat veritatis cupiditate commodi</blockquote>
-					</div>
-					<div class="col-md-7 col-sm-12">
-						<div class="flexslider">
-							<ul class="slides">
-								<li><img src="images/demo/slide-01.jpg" alt="Slide Image"/></li>
-								<li><img src="images/demo/slide-02.jpg" alt="Slide Image 2"/></li>
-							</ul>
-						</div>
-					</div>
-				</section>
-				<!--==========-->
-
-
-
-				<!--===============================-->
-				<!--== Subscribe Form =============-->
-				<!--===============================-->
-				<section id="subscribe" class="row">
-					<div class="col-sm-12">
-						<div class="section-header text-left">
-							<h2>Subscribe</h2>
-							<h4>Awesome section description goes here.</h4>
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<form id="subscribe-form" method="post" class="form">
-							<div class="col-sm-9 col-xs-12">
-								<input name="subscriber" id="subscriber" type="email" placeholder="Email" required>
-							</div>
-							<div class="col-sm-3 col-xs-12">
-								<input type="submit" value="Subscribe" name="submit">
-							</div>
-							<p class="form-notification" style="display: none;">Done!</p>
-						</form>
-					</div>
-					<div class="col-sm-12">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit eaque dolorem fugiat ullam ea! Perspiciatis, ipsum ea possimus voluptatem sequi amet harum dolores commodi eveniet earum est expedita error ab.</p>
-					</div>
-				</section>
 				
 
 				<!--===============================-->
@@ -284,36 +228,6 @@
 				<!--==========-->
 
 
-
-				<!--===============================-->
-				<!--== Carousel ===================-->
-				<!--===============================-->
-				<section id="partners" class="row">
-					<div class="col-sm-12">
-						<div class="section-header text-center">
-							<h2>Partners</h2>
-							<h4>Awesome section description goes here.</h4>
-						</div>
-					</div>
-					<div class="col-sm-12">
-						<div id="carousel" class="owl-carousel">
-							<div class="item"><img src="images/demo/partners/logo-01.png" alt="Logo 1"></div>
-							<div class="item"><img src="images/demo/partners/logo-02.png" alt="Logo 2"></div>
-							<div class="item"><img src="images/demo/partners/logo-03.png" alt="Logo 3"></div>
-							<div class="item"><img src="images/demo/partners/logo-04.png" alt="Logo 4"></div>
-							<div class="item"><img src="images/demo/partners/logo-05.png" alt="Logo 5"></div>
-							<div class="item"><img src="images/demo/partners/logo-06.png" alt="Logo 6"></div>
-						</div>
-						<div class="owl-carousel-navigation">
-							<a class="owl-btn prev fa fa-angle-left"></a>
-							<a class="owl-btn next fa fa-angle-right"></a>
-						</div>
-					</div>
-				</section>
-				<!--==========-->
-
-
-
 				<!--===============================-->
 				<!--== Pricing Tables =============-->
 				<!--===============================-->
@@ -329,6 +243,8 @@
 						<li>Reward Cards</li>
 						<li>Marketing Materials</li>
 						<li>Email Campaigns</li>
+						<li>Social Media</li>
+						<li>Detailed Analytics</li>
 					</ul>
 					<div class="col-md-3 col-sm-4">
 						<div class="pricing-table">
@@ -339,6 +255,8 @@
 								<li class="fa fa-minus-circle"><span>Reward Cards</span></li>
 								<li class="fa fa-check-circle"><span>Marketing Materials</span></li>
 								<li class="fa fa-minus-circle"><span>Email Campaigns</span></li>
+								<li class="fa fa-minus-circle"><span>Social Media</span></li>
+								<li class="fa fa-minus-circle"><span>Detailed Analytics</span></li>
 							</ul>
 						</div>
 					</div>
@@ -351,6 +269,8 @@
 								<li class="fa fa-check-circle"><span>Reward Cards</span></li>
 								<li class="fa fa-check-circle"><span>Marketing Materials</span></li>
 								<li class="fa fa-check-circle"><span>Email Campaigns</span></li>
+								<li class="fa fa-check-circle"><span>Social Media</span></li>
+								<li class="fa fa-check-circle"><span>Detailed Analytics</span></li>
 							</ul>
 						</div>
 					</div>
@@ -363,6 +283,8 @@
 								<li class="fa fa-check-circle"><span>Reward Cards</span></li>
 								<li class="fa fa-check-circle"><span>Marketing Materials</span></li>
 								<li class="fa fa-check-circle"><span>Email Campaigns</span></li>
+								<li class="fa fa-check-circle"><span>Social media</span></li>
+								<li class="fa fa-check-circle"><span>Detailed Analytics</span></li>
 							</ul>
 						</div>
 					</div>
@@ -382,17 +304,18 @@
 					</div>
 					<div class="col-sm-12">
 						<form id="register-form" method="post" class="form">
-							<div class="col-md-2 col-sm-6">
+							<!-- <div class="col-md-2 col-sm-6">
 								<input name="name" id="name" type="text" placeholder="Name" required>
-							</div>
-							<div class="col-md-3 col-sm-6">
+							</div> -->
+							<div class="col-md-4 col-sm-6">
 								<input name="email" id="email" type="email" placeholder="Email" required>
 							</div>
-							<div class="col-md-2 col-sm-6">
-								<input name="telephone" id="telephone" type="tel" placeholder="Telephone">
+							<div class="col-md-3 col-sm-6">
+								<!--<input name="telephone" id="telephone" type="tel" placeholder="Telephone"> -->
+								<input name="password" id="password" type="password" placeholder="Password" required>
 							</div>
 							<div class="col-md-2 col-sm-6">
-								<select name="ticket" id="ticket">
+								<select name="plan" id="plan">
 									<option value="app_only">App Only</option>
 									<option value="Gold">Gold</option>
 									<option value="Platinum">Platinum</option>

@@ -9,7 +9,7 @@
 
 							<h2><?php echo $post['title']; ?></h2>
 							<p>Posted on <strong><?php echo date("d/m/Y", strtotime($post['date_posted'])); ?></strong> by <strong><?php echo $post['author']; ?></strong></p>
-							<?php echo $post['summary']; ?> <p>Read more.</p>
+							<?php echo $post['summary']; ?> <p><a href="<?php echo base_url(); ?>blog/article/<?php echo $post['slug']; ?>">Read more</a>.</p>
 
 
 						<?php 
@@ -21,9 +21,9 @@
 					<div class="col-md-4 col-sm-12">
 						<h4>Blog Categories</h4>
 						<ul>
-							<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-							<li>Vero, deleniti, provident beatae illo accusantium</li>
-							<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+							<?php foreach($blog_categories as $bc) {
+								echo "<li>".$bc['name']."</li>";
+							} ?>
 						</ul>
 					</div>
 				</section>
