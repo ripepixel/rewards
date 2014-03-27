@@ -3,6 +3,7 @@
 	<?php $this->load->view('template/head'); ?>
 	<body>
 		<?php $this->load->view('template/header'); ?>
+		<?php $this->load->view('template/error_messages'); ?>
 
 		<?php $this->load->view($main); ?>
 		

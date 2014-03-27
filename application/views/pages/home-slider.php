@@ -1,4 +1,3 @@
-<!--== Site Description ==-->
 			<div class="header-cta">
 				<div class="container">
 					<div class="row">

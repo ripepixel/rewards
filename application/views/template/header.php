@@ -26,7 +26,7 @@
 							<li><a href="<?php echo base_url(); ?>#prices">Pricing</a></li>
 							<li><a href="<?php echo base_url(); ?>blog/">Blog</a></li>
 							<li><a href="<?php echo base_url(); ?>pages/contact">Contact</a></li>
-							<li class="current"><a href="<?php echo base_url(); ?>#register">Register</a></li>
+							<li class="current"><a href="<?php echo base_url(); ?>businesses/register">Register</a></li>
 							<li class="signin"><a href="<?php echo base_url(); ?>#register">Signin</a></li>
 						</ul>
 					</div>
