@@ -7,6 +7,13 @@ class General_model extends CI_Model {
         parent::__construct();
     }
 
+		function isBusinessLogged()
+		{
+			if(!$this->session->userdata('is_logged') && !$this->session->userdata('business_id')) {
+				$this->session->set_flashdata('error', 'Please sign in first.');
+				redirect('businesses/signin');
+			}
+		}
 
     function getPlans()
     {

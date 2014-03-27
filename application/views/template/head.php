@@ -4,7 +4,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 		<!--== CSS Files ==-->
+		
 		<link href="<?php echo base_url(); ?>css/bootstrap.css" rel="stylesheet" media="screen">
+		<link href="<?php echo base_url(); ?>css/main.css" rel="stylesheet" media="screen">
 		<link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" media="screen">
 		<link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet" media="screen">
 		<link href="<?php echo base_url(); ?>css/font-awesome.css" rel="stylesheet" media="screen">

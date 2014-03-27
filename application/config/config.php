@@ -15,6 +15,7 @@
 |
 */
 $config['base_url']	= 'http://localhost/rewards/';
+//$config['base_url']	= 'http://192.168.1.6/rewards/';
 
 /*
 |--------------------------------------------------------------------------
@@ -180,7 +181,7 @@ $config['directory_trigger']	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 1;
 
 /*
 |--------------------------------------------------------------------------
@@ -365,9 +366,10 @@ $config['proxy_ips'] = '';
 |
 */
 
-$config['smtp_host'] = "mail.how-media.co.uk";
-$config['smtp_user'] = "contact@how-media.co.uk";
-$config['smtp_pass'] = "Georgian99?";
+$config['protocol'] = 'smtp';
+$config['smtp_host'] = 'mail.how-media.co.uk';
+$config['smtp_user'] = 'contact@how-media.co.uk';
+$config['smtp_pass'] = 'Georgian99?';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

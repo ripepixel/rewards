@@ -28,8 +28,15 @@
       }
     
 	if(validation_errors()) { ?>
-		<div class="alert alert-error">
-			<button class="close" data-dismiss="alert">×</button>
-			There have been errors editing your profile!
-		</div>
+		<section id='alerts'>
+			<div class='container'>
+				<div class='row'>
+					<div class="col-md-12 col-sm-12">
+						<div class='alert alert-danger'>
+							There were errors with the information. Please check the errors below.
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 	<?php } ?>

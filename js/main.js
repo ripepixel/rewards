@@ -1,7 +1,8 @@
 (function ($) {
     "use strict";
 
-    
+    $('#fadeout').fadeOut(5000);
+
     var venueAddress = "142 Market Street, Tottington, Bury, BL8 3LS, UK";
     var venueTitle = "Get Rewards Here";
     

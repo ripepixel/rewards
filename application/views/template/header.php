@@ -20,6 +20,10 @@
 					<div class="navbar-collapse collapse">
 						<!--== Navigation Menu ==-->
 						<ul class="nav navbar-nav">
+							<?php if($this->session->userdata('is_logged')) { ?>
+								<li class="current"><a href="<?php echo base_url(); ?>dashboard">Dashboard</a></li>
+								<li class="signin"><a href="<?php echo base_url(); ?>businesses/signout">Sign out</a></li>
+							<?php } else { ?>
 							<li><a href="<?php echo base_url(); ?>">Home</a></li>
 							<li><a href="<?php echo base_url(); ?>#schedule">Schedule</a></li>
 							<li><a href="<?php echo base_url(); ?>#faq">FAQ</a></li>
@@ -27,7 +31,8 @@
 							<li><a href="<?php echo base_url(); ?>blog/">Blog</a></li>
 							<li><a href="<?php echo base_url(); ?>pages/contact">Contact</a></li>
 							<li class="current"><a href="<?php echo base_url(); ?>businesses/register">Register</a></li>
-							<li class="signin"><a href="<?php echo base_url(); ?>#register">Signin</a></li>
+							<li class="signin"><a href="<?php echo base_url(); ?>businesses/signin">Sign in</a></li>
+							<?php } ?>
 						</ul>
 					</div>
 				</nav>
