@@ -26,6 +26,10 @@ a, .accordion-heading span, .speaker-contacts > .contact,
 	background-color: #30DB86;
 }
 
+.nav li.signout a {
+	background-color: #F75454;
+}
+
 /*--------------------
 Reset ==============*/
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,hr,th,td {
@@ -171,6 +175,10 @@ input[type='submit']:hover {
 
 input[type='submit']:active {
 	border-bottom: 1px solid #b85146;
+}
+
+.striked {
+	text-decoration: line-through;
 }
 
 .box {

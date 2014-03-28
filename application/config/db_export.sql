@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 26, 2014 at 04:30 PM
+-- Generation Time: Mar 28, 2014 at 04:30 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -74,11 +74,21 @@ INSERT INTO `blog_posts` (`id`, `title`, `slug`, `summary`, `content`, `image`, 
 CREATE TABLE IF NOT EXISTS `businesses` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
-  `password` int(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
   `plan_id` int(3) NOT NULL,
+  `email_confirmation` varchar(255) NOT NULL,
   `is_active` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `businesses`
+--
+
+INSERT INTO `businesses` (`id`, `email`, `password`, `first_name`, `last_name`, `plan_id`, `email_confirmation`, `is_active`) VALUES
+(2, 'neal_howarth@tiscali.co.uk', '5f4dcc3b5aa765d61d8327deb882cf99', 'Neal', 'Howarth', 3, 'hj6nu0dm745n5kw7tmhaq', 1);
 
 -- --------------------------------------------------------
 
@@ -115,10 +125,19 @@ CREATE TABLE IF NOT EXISTS `outlets` (
   `fax` varchar(15) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `website` varchar(255) DEFAULT NULL,
+  `twitter` varchar(255) DEFAULT NULL,
+  `facebook` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `is_active` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `outlets`
+--
+
+INSERT INTO `outlets` (`id`, `business_id`, `name`, `street`, `town`, `county`, `postcode`, `telephone`, `fax`, `email`, `website`, `twitter`, `facebook`, `image`, `is_active`) VALUES
+(9, 2, 'Test Outlet', '142 Market Street', 'Bury', 'Lancashire', 'BL8 3LS', '01204 782715', NULL, '', 'http://www.how-media.co.uk', '', '', 'ipad-store.png', 0);
 
 -- --------------------------------------------------------
 
@@ -161,6 +180,20 @@ INSERT INTO `plans` (`id`, `title`, `setup_fee`, `price`, `active`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `plan_purchases`
+--
+
+CREATE TABLE IF NOT EXISTS `plan_purchases` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `business_id` int(10) NOT NULL,
+  `plan_id` int(3) NOT NULL,
+  `is_active` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rewards`
 --
 
@@ -174,7 +207,20 @@ CREATE TABLE IF NOT EXISTS `rewards` (
   `is_active` int(1) NOT NULL DEFAULT '0',
   `is_deleted` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `rewards`
+--
+
+INSERT INTO `rewards` (`id`, `outlet_id`, `business_id`, `points`, `title`, `details`, `is_active`, `is_deleted`) VALUES
+(1, 9, 2, 5, 'Get a High Five', 'Get a High Five', 1, 0),
+(2, 9, 2, 10, 'Get a free sticker', 'Get a free sticker', 1, 0),
+(3, 9, 2, 20, 'Get a free Coffee', 'Get a free Coffee', 1, 0),
+(4, 9, 2, 50, 'Get a free slice of cake', 'Get a free slice of cake', 1, 0),
+(5, 9, 2, 100, 'Get a free soup and roll', 'Get a free soup and roll', 1, 0),
+(6, 9, 2, 150, 'Get something', 'Get something', 1, 0),
+(7, 9, 2, 200, 'Get something else', 'Get something else', 1, 0);
 
 -- --------------------------------------------------------
 

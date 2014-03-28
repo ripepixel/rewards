@@ -5,7 +5,6 @@
 
 		<!--== CSS Files ==-->
 		
-		<link href="<?php echo base_url(); ?>css/bootstrap.css" rel="stylesheet" media="screen">
 		<link href="<?php echo base_url(); ?>css/main.css" rel="stylesheet" media="screen">
 		<link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" media="screen">
 		<link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet" media="screen">

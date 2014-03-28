@@ -61,7 +61,8 @@ class Business_model extends CI_Model {
 		function hasCreatedOutlet()
 		{
 			$this->db->where('business_id', $this->session->userdata('business_id'));
-			$this->db->where('is_active', 1);
+			$is_active = $this->hasActivePlan() ? 1 : 0;
+			$this->db->where('is_active', $is_active);
 			$q = $this->db->get('outlets');
 			if($q->num_rows() > 0) {
 				return TRUE;
@@ -73,7 +74,7 @@ class Business_model extends CI_Model {
 		function hasCreatedRewards()
 		{
 			$this->db->where('business_id', $this->session->userdata('business_id'));
-			$this->db->where('is_active', 1);
+			$this->db->where('is_deleted', 0);
 			$q = $this->db->get('rewards');
 			if($q->num_rows() > 0) {
 				return TRUE;
@@ -81,6 +82,8 @@ class Business_model extends CI_Model {
 				return FALSE;
 			}
 		}
+
+		
 
 
 

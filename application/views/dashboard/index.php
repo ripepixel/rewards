@@ -11,39 +11,93 @@
 					<div class="col-md-12 col-sm-12">
 						<h3>ToDo's</h3>
 					</div>
-					<?php if($paid_plan == false) {?>
-					<div class="col-md-4 col-xs-6">
-						<div class="event-info">
-							<div class="icon fa fa-tasks"></div>
-							<div class="info">
-								<h3>Pay Your Plan</h3>
-								<span>Please pay for your plan</span>
-							</div>
-						</div>
-					</div>
-					<?php } ?>
 					<?php if($has_outlet == false) {?>
 					<div class="col-md-4 col-xs-6">
 						<div class="event-info">
 							<div class="icon fa fa-map-marker"></div>
 							<div class="info">
-								<h3>Create Your Outlet</h3>
+								<h3><a href="<?php echo base_url(); ?>dashboard/new_outlet">Create Your Outlet</a></h3>
 								<span>Set up your outlet details</span>
 							</div>
 						</div>
 					</div>
+					<?php } else { ?>
+						<div class="col-md-4 col-xs-6">
+						<div class="event-info">
+							<div class="icon fa fa-map-marker"></div>
+							<div class="info">
+								<h3 class="striked">Create Your Outlet</h3>
+								<span><a href="<?php echo base_url(); ?>dashboard/edit_outlet">Update your outlet details</a></span>
+							</div>
+						</div>
+					</div>
 					<?php } ?>
+
 					<?php if($has_rewards == false) {?>
 					<div class="col-md-4 col-xs-6">
 						<div class="event-info">
 							<div class="icon fa fa-star-o"></div>
 							<div class="info">
-								<h3>Add Your Rewards</h3>
+								<h3><a href="<?php echo base_url(); ?>dashboard/new_rewards">Add Your Rewards</a></h3>
 								<span>Setup your rewards</span>
 							</div>
 						</div>
 					</div>
+					<?php } else { ?>
+					<div class="col-md-4 col-xs-6">
+						<div class="event-info">
+							<div class="icon fa fa-star-o"></div>
+							<div class="info">
+								<h3 class="striked">Add Your Rewards</h3>
+								<span><a href="<?php echo base_url(); ?>dashboard/edit_rewards">Update your rewards</a></span>
+							</div>
+						</div>
+					</div>
 					<?php } ?>
+
+					<?php if($paid_plan == false) {?>
+					<div class="col-md-4 col-xs-6">
+						<div class="event-info">
+							<div class="icon fa fa-tasks"></div>
+							<div class="info">
+								<h3>Pay For Your Plan</h3>
+								<span>Please pay for your plan</span>
+							</div>
+						</div>
+					</div>
+					<?php } ?>
+				</section>
+				<?php } else { ?>
+					<section id="features" class="row">
+					<div class="col-md-4 col-xs-6">
+						<div class="event-info">
+							<div class="icon fa fa-map-marker"></div>
+							<div class="info">
+								<h3><a href="<?php echo base_url(); ?>dashboard/new_outlet">Your Outlet</a></h3>
+								<span>Your outlet details</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-4 col-xs-6">
+						<div class="event-info">
+							<div class="icon fa fa-star-o"></div>
+							<div class="info">
+								<h3>Your Rewards</h3>
+								<span>Your rewards</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-4 col-xs-6">
+						<div class="event-info">
+							<div class="icon fa fa-tasks"></div>
+							<div class="info">
+								<h3>Your Plan</h3>
+								<span>Your plan</span>
+							</div>
+						</div>
+					</div>
 				</section>
 				<?php } ?>
 

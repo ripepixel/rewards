@@ -22,7 +22,7 @@
 						<ul class="nav navbar-nav">
 							<?php if($this->session->userdata('is_logged')) { ?>
 								<li class="current"><a href="<?php echo base_url(); ?>dashboard">Dashboard</a></li>
-								<li class="signin"><a href="<?php echo base_url(); ?>businesses/signout">Sign out</a></li>
+								<li class="signout"><a href="<?php echo base_url(); ?>businesses/signout">Sign out</a></li>
 							<?php } else { ?>
 							<li><a href="<?php echo base_url(); ?>">Home</a></li>
 							<li><a href="<?php echo base_url(); ?>#schedule">Schedule</a></li>
