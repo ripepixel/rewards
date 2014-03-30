@@ -7,12 +7,29 @@ class Business_model extends CI_Model {
         parent::__construct();
     }
 
+		function getBusiness($id)
+		{
+			$this->db->where('id', $id);
+			$q = $this->db->get('businesses');
+			if($q->num_rows() == 1) {
+				return $q->row();
+			} else {
+				return false;
+			}
+		}
 
     function createBusiness($data)
     {
     	$this->db->insert('businesses', $data);
 			return true;
     }
+
+		function updateBusiness($bid, $data)
+		{
+			$this->db->where('id', $bid);
+			$this->db->update('businesses', $data);
+			return true;
+		}
 
 		function confirm_account($email, $code)
 		{
@@ -83,7 +100,34 @@ class Business_model extends CI_Model {
 			}
 		}
 
+		function getPlanDetails($pid)
+		{
+			$this->db->where('id', $pid);
+			$q = $this->db->get('plans');
+			if($q->num_rows() == 1) {
+				return $q->row();
+			} else {
+				return false;
+			}
+		}
 		
+		function createPlanPurchase($data)
+		{
+			$this->db->insert('plan_purchases', $data);
+			return true;
+		}
+		
+		function getPaymentDetails($bid)
+		{
+			$this->db->where('business_id', $bid);
+			$this->db->where('is_active', 1);
+			$q = $this->db->get('plan_purchases');
+			if($q->num_rows() == 1) {
+				return $q->row();
+			} else {
+				return false;
+			}
+		}
 
 
 

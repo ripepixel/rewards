@@ -60,8 +60,8 @@
 						<div class="event-info">
 							<div class="icon fa fa-tasks"></div>
 							<div class="info">
-								<h3>Pay For Your Plan</h3>
-								<span>Please pay for your plan</span>
+								<h3><a href="<?php echo base_url(); ?>dashboard/pay_for_plan">Pay For Your Plan</a></h3>
+								<span>Pay for your plan</span>
 							</div>
 						</div>
 					</div>
@@ -73,7 +73,7 @@
 						<div class="event-info">
 							<div class="icon fa fa-map-marker"></div>
 							<div class="info">
-								<h3><a href="<?php echo base_url(); ?>dashboard/new_outlet">Your Outlet</a></h3>
+								<h3><a href="<?php echo base_url(); ?>dashboard/edit_outlet">Your Outlet</a></h3>
 								<span>Your outlet details</span>
 							</div>
 						</div>
@@ -83,7 +83,7 @@
 						<div class="event-info">
 							<div class="icon fa fa-star-o"></div>
 							<div class="info">
-								<h3>Your Rewards</h3>
+								<h3><a href="<?php echo base_url(); ?>dashboard/edit_rewards">Your Rewards</a></h3>
 								<span>Your rewards</span>
 							</div>
 						</div>
@@ -93,8 +93,8 @@
 						<div class="event-info">
 							<div class="icon fa fa-tasks"></div>
 							<div class="info">
-								<h3>Your Plan</h3>
-								<span>Your plan</span>
+								<h3><a href="<?php echo base_url(); ?>dashboard/my_plan">Your Details</a></h3>
+								<span>Your details</span>
 							</div>
 						</div>
 					</div>

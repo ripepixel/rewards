@@ -224,6 +224,162 @@ class Dashboard extends CI_Controller {
 		$data['main'] = 'dashboard/edit_rewards';
 		$this->load->view('template/template', $data);
 	}
+	
+	public function pay_for_plan()
+	{
+		# check not already paid
+		$paid_plan = $this->business_model->hasActivePlan();
+		if($paid_plan) {
+			// go to plan details - already paid
+			redirect('dashboard/my_plan');
+		} else {
+			$data['plan'] = $this->business_model->getPlanDetails($this->session->userdata('plan_id'));
+			$data['plans'] = $this->general_model->getPlans();
+			$data['slider_title'] = "Lets Get Started";
+			$data['slider'] = 'template/blank-slider';
+			$data['main'] = 'dashboard/pay_for_plan';
+			$this->load->view('template/template', $data);
+		}
+	}
+	
+	public function send_for_payment()
+	{
+		
+		$this->loadGoCardless();
+		# send to goCardless for payment
+		$plan_id = $this->input->post('plan');
+		$plan = $this->business_model->getPlanDetails($plan_id);
+		$user = $this->business_model->getBusiness($this->session->userdata('business_id'));
+		$sub_details = array(
+			'amount' => $plan->price,
+			'interval_length' => $plan->interval_length,
+			'interval_unit' => $plan->interval_unit,
+			'name' => $plan->title." Plan",
+			'state' => $this->session->userdata('business_id').":".$plan->id,
+			'user' => array(
+				'first_name' => $user->first_name,
+				'last_name' => $user->last_name,
+				'email' => $user->email
+			)
+		);
+		if($plan->setup_fee) {
+			$sub_details['setup_fee'] = $plan->setup_fee;
+		}
+		
+		// Generate the url
+		$subscription_url = $this->gocardless->new_subscription_url($sub_details);
+		
+		redirect($subscription_url);
+		
+	}
+	
+	
+	public function process_payment()
+	{
+		$this->loadGoCardless();
+		# check response code and deal accordingly
+		// Required confirm variables
+		$confirm_params = array(
+		  'resource_id'    => $_GET['resource_id'],
+		  'resource_type'  => $_GET['resource_type'],
+		  'resource_uri'   => $_GET['resource_uri'],
+		  'signature'      => $_GET['signature']
+		);
+
+		// State is optional
+		if (isset($_GET['state'])) {
+		  $confirm_params['state'] = $_GET['state'];
+			list($bus_id, $plan_id) = explode(":", $_GET['state']);
+		}
+
+		$confirmed_resource = $this->gocardless->confirm_resource($confirm_params);
+		if($confirmed_resource->status == 'active') {
+			// set up payment
+			$data = array(
+				'business_id' => $bus_id,
+				'plan_id' => $plan_id,
+				'resource_id' => $confirm_params['resource_id'],
+				'resource_type' => $confirm_params['resource_type'],
+				'resource_uri' => $confirm_params['resource_uri'],
+				'signature' => $confirm_params['signature'],
+				'amount' => $confirmed_resource->amount,
+				'created_at' => $confirmed_resource->created_at,
+				'status' => $confirmed_resource->status,
+				'is_active' => 1
+			);
+			
+			$this->business_model->createPlanPurchase($data);
+			
+			// update plan id incase it has changed 
+			$b_data = array(
+				'plan_id' => $plan_id
+			);
+			$this->business_model->updateBusiness($bus_id, $b_data);
+			
+			// set outlet to active
+			$outlet = $this->outlet_model->getFirstOutlet();
+			$o_data = array(
+				'is_active' => 1
+			);
+			$this->outlet_model->updateOutlet($outlet->id, $o_data);
+			
+			// send email to business with the good news
+			// send email to me with the order details
+			
+			// redirect
+			$this->session->set_userdata('has_paid', true);
+			$this->session->set_flashdata('success', 'Awesome, you have confirmed your payment.');
+			redirect('dashboard/thanks');
+			
+		} else {
+			$this->session->set_flashdata('error', 'There was a problem with your payment.');
+			redirect('dashboard');
+		}
+		
+	}
+	
+	public function thanks()
+	{
+		# check if has_paid session = true
+		if($this->session->userdata('has_paid') && $this->session->userdata('has_paid') == true) {
+			$this->session->unset_userdata('has_paid');
+			$data['slider_title'] = "Thanks for joining us";
+			$data['slider'] = 'template/blank-slider';
+			$data['main'] = 'dashboard/thanks';
+			$this->load->view('template/template', $data);
+		} else {
+			redirect('dashboard');
+		}
+	}
+	
+	public function my_plan()
+	{
+		$this->loadGoCardless();
+		
+		$data['payment'] = $this->business_model->getPaymentDetails($this->session->userdata('business_id'));
+		$data['plan'] = $this->business_model->getPlanDetails($data['payment']->plan_id);
+		$data['subscription'] = GoCardless_Subscription::find($data['payment']->resource_id);
+		$data['slider_title'] = "Your Details";
+		$data['slider'] = 'template/blank-slider';
+		$data['main'] = 'dashboard/my_plan';
+		$this->load->view('template/template', $data);
+	}
+	
+	
+	
+	function loadGoCardless()
+	{
+		$account_details = array(
+		  'app_id'        => $this->config->item('gocardless_app_id'),
+		  'app_secret'    => $this->config->item('gocardless_app_secret'),
+		  'merchant_id'   => $this->config->item('gocardless_merchant_id'),
+		  'access_token'  => $this->config->item('gocardless_access_token')
+		);
+
+		// Initialize GoCardless
+		GoCardless::set_account_details($account_details);
+		//https://sandbox.gocardless.com/merchants/0JJNJY6F0N/confirm_resource
+	}
 
 
 

@@ -1,5 +1,6 @@
 <div class="content">
 			<div class="container box">
+				<?php $this->load->view('dashboard/outlet_menu'); ?>
 				
 				<section id="dashboard" class="row">
 					<div class="col-md-12 col-sm-12">

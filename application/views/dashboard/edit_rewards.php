@@ -2,7 +2,7 @@
 	<div class="container box">
 		
 		<section id="dashboard" class="row">
-			<div class="col-md-7 col-sm-12">
+			<div class="col-lg-7 col-sm-12">
 				<h3>Your Rewards</h3>
 				<table class="table table-striped">
 					<thead>
@@ -25,7 +25,7 @@
 				
 			</div>
 
-			<div class="col-md-5 col-sm-12">
+			<div class="col-lg-5 col-sm-12">
 				<form class="form" action="<?php echo base_url(); ?>dashboard/save_rewards" method="post">
 					<div class="col-md-12">
 						<h3>Add More Rewards</h3>

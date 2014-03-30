@@ -8,7 +8,7 @@
 							<h4>Awesome section description goes here.</h4>
 						</div>
 					</div>
-					<ul class="col-sm-3 pricing-features">
+					<ul class="col-sm-3 col-md-4 pricing-features">
 						<li>Tablet, Stand &amp; Lock</li>
 						<li>Reward Cards</li>
 						<li>Marketing Materials</li>
@@ -16,7 +16,7 @@
 						<li>Social Media</li>
 						<li>Detailed Analytics</li>
 					</ul>
-					<div class="col-md-3 col-sm-4">
+					<!--<div class="col-md-3 col-sm-4">
 						<div class="pricing-table">
 							<h3 class="table-title">App Only</h3>
 							<div class="table-price">&pound;9.99 /month</div>
@@ -29,8 +29,8 @@
 								<li class="fa fa-minus-circle"><span>Detailed Analytics</span></li>
 							</ul>
 						</div>
-					</div>
-					<div class="col-md-3 col-sm-4">
+					</div> -->
+					<div class="col-md-4 col-sm-4">
 						<div class="pricing-table">
 							<h3 class="table-title">Gold</h3>
 							<div class="table-price">&pound;29.99 /month</div>
@@ -44,7 +44,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-4">
+					<div class="col-md-4 col-sm-4">
 						<div class="pricing-table">
 							<h3 class="table-title">Platinum</h3>
 							<div class="table-price">&pound;39.99 /month</div>

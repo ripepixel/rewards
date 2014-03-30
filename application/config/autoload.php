@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database', 'session', 'form_validation', 'pagination', 'email');
+$autoload['libraries'] = array('database', 'session', 'form_validation', 'pagination', 'email', 'gocardless');
 
 
 /*
@@ -80,7 +80,7 @@ $autoload['helper'] = array('url', 'form', 'file');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('gocardless');
 
 
 /*

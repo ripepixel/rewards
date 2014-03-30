@@ -14,8 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/rewards/';
-//$config['base_url']	= 'http://192.168.1.6/rewards/';
+//$config['base_url']	= 'http://localhost/rewards/';
+$config['base_url']	= 'http://192.168.1.6/rewards/';
 
 /*
 |--------------------------------------------------------------------------
@@ -370,6 +370,18 @@ $config['protocol'] = 'smtp';
 $config['smtp_host'] = 'mail.how-media.co.uk';
 $config['smtp_user'] = 'contact@how-media.co.uk';
 $config['smtp_pass'] = 'Georgian99?';
+
+/*
+|--------------------------------------------------------------------------
+| GoCardless Config
+|--------------------------------------------------------------------------
+|
+*/
+$config['gocardless_app_id'] = 'VD4NYGA6NWWGYG299RFB094SKZ07MBHMYHY2WP5Z2C41MSKHYD5562H1B9GCT8F2';
+$config['gocardless_app_secret'] = 'BRHCVR7Z3VQYY50CXHECSQCY8Y0RBV6NCMEZ3PEXH8J6XB36HX58FD7P7J7AHVYY';
+$config['gocardless_merchant_id'] = '0JJNJY6F0N';
+$config['gocardless_access_token'] = 'QK3T8D6RFZ0C83Y7889CYMT30Q9N9JRJ1GCTFQNWA76Z4Z06YDXM5VQTEBDYWPFP';
+
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
