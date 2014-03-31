@@ -3,11 +3,28 @@
 				
 				<section id="features" class="row">
 					<div class="col-md-12 col-sm-12">
-						<h3>Your Details</h3>
+						
 					</div>
 					
 					<div class="col-md-8 col-sm-12">
-						<?php //print_r($subscription); ?>
+						<h3>Your Details</h3>
+						<p>Your email address is currently set to <strong><?php echo $business->email; ?></strong>. If you need to change your email address, please contact support.</p>
+
+						<hr />
+						<h3>Change your password</h3>
+						<form class="form" action="<?php echo base_url(); ?>dashboard/change_password" method="post">
+							<div class="col-md-6 col-sm-12">
+								<input type="password" name="password" placeholder="New Password" required >
+								<?php echo form_error('password'); ?>
+							</div>
+							<div class="col-md-6 col-sm-12">
+								<input type="password" name="conf_password" placeholder="Confirm Password" required >
+								<?php echo form_error('conf_password'); ?>
+							</div>
+							<div class="col-md-6 col-sm-12">
+								<input type="submit" value="Reset Password" name="submit">
+							</div>
+						</form>
 					</div>
 					
 					<div class="col-md-4 col-sm-12">

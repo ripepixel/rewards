@@ -62,6 +62,15 @@ class Business_model extends CI_Model {
 				return false;
 			}
 		}
+
+		function updatePassword($bid, $pass)
+		{
+			$data = array('password' => $pass);
+			$this->db->where('id', $bid);
+			$this->db->update('businesses', $data);
+
+			return true;
+		}
 		
 		function hasActivePlan()
 		{

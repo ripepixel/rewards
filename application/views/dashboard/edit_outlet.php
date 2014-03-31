@@ -4,13 +4,16 @@
 				
 				<section id="dashboard" class="row">
 					<div class="col-md-12 col-sm-12">
-						<p>Update your business outlet details.</p>
+						<h3>Outlet Details</h3>
 					</div>
 					<div class="col-md-12 col-sm-12">
 						<form action="<?php echo base_url(); ?>dashboard/update_outlet" method="post" class="form" enctype="multipart/form-data">
 							<div class="col-md-12 col-sm-12">
 								<input name="name" id="name" type="text" placeholder="Business Name" value="<?php echo $outlet->name; ?>" required>
 								<?php echo form_error('name'); ?>
+							</div>
+							<div class="col-md-12 col-sm-12">
+								<h4>Outlet Address</h4>
 							</div>
 							<div class="col-md-12 col-sm-12">
 								<input name="street" id="street" type="text" placeholder="Street" value="<?php echo $outlet->street; ?>" required>
@@ -32,13 +35,17 @@
 								<input name="telephone" id="telephone" type="text" placeholder="Telephone" value="<?php echo $outlet->telephone; ?>">
 								<?php echo form_error('telephone'); ?>
 							</div>
+							
+							<div class="col-md-12 col-sm-12">
+								<h4>Social</h4>
+							</div>
+							<div class="col-md-6 col-sm-12">
+								<input name="website" id="website" type="text" placeholder="www.your-website.com" value="<?php echo $outlet->website; ?>">
+								<?php echo form_error('website'); ?>
+							</div>
 							<div class="col-md-6 col-sm-12">
 								<input name="email" id="email" type="email" placeholder="Public Email" value="<?php echo $outlet->email; ?>">
 								<?php echo form_error('email'); ?>
-							</div>
-							<div class="col-md-12 col-sm-12">
-								<input name="website" id="website" type="text" placeholder="www.your-website.com" value="<?php echo $outlet->website; ?>">
-								<?php echo form_error('website'); ?>
 							</div>
 							<div class="col-md-6 col-sm-12">
 								<input name="twitter" id="twitter" type="text" placeholder="Twitter Page" value="<?php echo $outlet->twitter; ?>">
@@ -47,6 +54,9 @@
 							<div class="col-md-6 col-sm-12">
 								<input name="facebook" id="facebook" type="text" placeholder="Facebook Page" value="<?php echo $outlet->facebook; ?>">
 								<?php echo form_error('facebook'); ?>
+							</div>
+							<div class="col-md-12 col-sm-12">
+								<h4>Logo</h4>
 							</div>
 							<div class="col-md-3 col-sm-4">
 								<?php if($outlet->image != '') { ?>

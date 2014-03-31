@@ -26,7 +26,7 @@ class Businesses extends CI_Controller {
 		$this->form_validation->set_rules('first_name', 'First Name', 'required');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[businesses.email]');
-		$this->form_validation->set_rules('password', 'password', 'required');
+		$this->form_validation->set_rules('password', 'password', 'required|min_length[6]');
 		$this->form_validation->set_rules('conf_password', 'Confirmation Password', 'required|matches[password]');
 		
 		if($this->form_validation->run() == false) {

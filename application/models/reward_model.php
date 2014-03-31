@@ -28,6 +28,18 @@ class Reward_model extends CI_Model {
     	}
     }
 
+    function qtyExists($qty, $oid)
+    {
+        $this->db->where('points', $qty);
+        $this->db->where('outlet_id', $oid);
+        $q = $this->db->get('rewards');
+        if($q->num_rows() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
 

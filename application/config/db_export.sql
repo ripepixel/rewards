@@ -1,18 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 30, 2014 at 11:46 PM
--- Server version: 5.5.25
--- PHP Version: 5.4.4
+-- Generation Time: Mar 31, 2014 at 03:55 PM
+-- Server version: 5.6.12-log
+-- PHP Version: 5.4.16
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
 -- Database: `rewards`
 --
+CREATE DATABASE IF NOT EXISTS `rewards` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `rewards`;
 
 -- --------------------------------------------------------
 
@@ -20,7 +22,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `blog_categories`
 --
 
-CREATE TABLE `blog_categories` (
+CREATE TABLE IF NOT EXISTS `blog_categories` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
@@ -41,7 +43,7 @@ INSERT INTO `blog_categories` (`id`, `name`, `slug`, `order`) VALUES
 -- Table structure for table `blog_posts`
 --
 
-CREATE TABLE `blog_posts` (
+CREATE TABLE IF NOT EXISTS `blog_posts` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
@@ -69,7 +71,7 @@ INSERT INTO `blog_posts` (`id`, `title`, `slug`, `summary`, `content`, `image`, 
 -- Table structure for table `businesses`
 --
 
-CREATE TABLE `businesses` (
+CREATE TABLE IF NOT EXISTS `businesses` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -86,7 +88,7 @@ CREATE TABLE `businesses` (
 --
 
 INSERT INTO `businesses` (`id`, `email`, `password`, `first_name`, `last_name`, `plan_id`, `email_confirmation`, `is_active`) VALUES
-(2, 'neal_howarth@tiscali.co.uk', '5f4dcc3b5aa765d61d8327deb882cf99', 'Neal', 'Howarth', 3, 'hj6nu0dm745n5kw7tmhaq', 1);
+(2, 'neal_howarth@tiscali.co.uk', '6062ac89be1e4ecbee73d81296d69746', 'Neal', 'Howarth', 3, 'hj6nu0dm745n5kw7tmhaq', 1);
 
 -- --------------------------------------------------------
 
@@ -94,7 +96,7 @@ INSERT INTO `businesses` (`id`, `email`, `password`, `first_name`, `last_name`, 
 -- Table structure for table `cards`
 --
 
-CREATE TABLE `cards` (
+CREATE TABLE IF NOT EXISTS `cards` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
   `card_number` varchar(100) NOT NULL,
@@ -111,7 +113,7 @@ CREATE TABLE `cards` (
 -- Table structure for table `outlets`
 --
 
-CREATE TABLE `outlets` (
+CREATE TABLE IF NOT EXISTS `outlets` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `business_id` int(10) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -143,7 +145,7 @@ INSERT INTO `outlets` (`id`, `business_id`, `name`, `street`, `town`, `county`, 
 -- Table structure for table `outlet_settings`
 --
 
-CREATE TABLE `outlet_settings` (
+CREATE TABLE IF NOT EXISTS `outlet_settings` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `outlet_id` int(10) NOT NULL,
   `checkin_points` int(6) DEFAULT NULL,
@@ -157,7 +159,7 @@ CREATE TABLE `outlet_settings` (
 -- Table structure for table `plans`
 --
 
-CREATE TABLE `plans` (
+CREATE TABLE IF NOT EXISTS `plans` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `setup_fee` decimal(8,2) NOT NULL,
@@ -166,6 +168,7 @@ CREATE TABLE `plans` (
   `interval_unit` varchar(10) NOT NULL,
   `cancel_after` int(2) NOT NULL,
   `active` int(1) NOT NULL,
+  `is_visible` int(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -173,10 +176,10 @@ CREATE TABLE `plans` (
 -- Dumping data for table `plans`
 --
 
-INSERT INTO `plans` (`id`, `title`, `setup_fee`, `price`, `interval_length`, `interval_unit`, `cancel_after`, `active`) VALUES
-(1, 'App Only', 0.00, 9.99, 1, 'month', 12, 1),
-(2, 'Basic', 0.00, 24.99, 1, 'month', 12, 1),
-(3, 'Pro', 0.00, 29.99, 1, 'month', 12, 1);
+INSERT INTO `plans` (`id`, `title`, `setup_fee`, `price`, `interval_length`, `interval_unit`, `cancel_after`, `active`, `is_visible`) VALUES
+(1, 'App Only', '0.00', '9.99', 1, 'month', 12, 1, 1),
+(2, 'Basic', '0.00', '24.99', 1, 'month', 12, 1, 1),
+(3, 'Pro', '0.00', '29.99', 1, 'month', 12, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +187,7 @@ INSERT INTO `plans` (`id`, `title`, `setup_fee`, `price`, `interval_length`, `in
 -- Table structure for table `plan_purchases`
 --
 
-CREATE TABLE `plan_purchases` (
+CREATE TABLE IF NOT EXISTS `plan_purchases` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `business_id` int(10) NOT NULL,
   `plan_id` int(3) NOT NULL,
@@ -204,7 +207,7 @@ CREATE TABLE `plan_purchases` (
 --
 
 INSERT INTO `plan_purchases` (`id`, `business_id`, `plan_id`, `resource_id`, `resource_type`, `resource_uri`, `signature`, `amount`, `created_at`, `status`, `is_active`) VALUES
-(3, 2, 3, '0K67DF43CY', 'subscription', 'https://sandbox.gocardless.com/api/v1/subscriptions/0K67DF43CY', '487ba62933f6c16260aac022e84af40bae093bd59ad0dec94a74b0b098d49260', 29.99, '2014-03-29T23:04:47Z', 'active', 1);
+(3, 2, 3, '0K67DF43CY', 'subscription', 'https://sandbox.gocardless.com/api/v1/subscriptions/0K67DF43CY', '487ba62933f6c16260aac022e84af40bae093bd59ad0dec94a74b0b098d49260', '29.99', '2014-03-29T23:04:47Z', 'active', 1);
 
 -- --------------------------------------------------------
 
@@ -212,7 +215,7 @@ INSERT INTO `plan_purchases` (`id`, `business_id`, `plan_id`, `resource_id`, `re
 -- Table structure for table `rewards`
 --
 
-CREATE TABLE `rewards` (
+CREATE TABLE IF NOT EXISTS `rewards` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `outlet_id` int(10) NOT NULL,
   `business_id` int(10) NOT NULL,
@@ -222,7 +225,7 @@ CREATE TABLE `rewards` (
   `is_active` int(1) NOT NULL DEFAULT '0',
   `is_deleted` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `rewards`
@@ -236,7 +239,8 @@ INSERT INTO `rewards` (`id`, `outlet_id`, `business_id`, `points`, `title`, `det
 (5, 9, 2, 100, 'Get a free soup and roll', 'Get a free soup and roll', 1, 0),
 (6, 9, 2, 150, 'Get something', 'Get something', 1, 0),
 (7, 9, 2, 200, 'Get something else', 'Get something else', 1, 0),
-(8, 9, 2, 500, 'Get some', 'Get some', 1, 0);
+(8, 9, 2, 500, 'Get some', 'Get some', 1, 0),
+(9, 9, 2, 1000, 'Test', 'Test', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -244,7 +248,7 @@ INSERT INTO `rewards` (`id`, `outlet_id`, `business_id`, `points`, `title`, `det
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,

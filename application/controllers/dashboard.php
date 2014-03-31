@@ -185,26 +185,38 @@ class Dashboard extends CI_Controller {
 	{
 		if(!empty($_POST['ok'])) {
 			// add rewards
+			$errors = false;
 			if(!empty($_POST['points'])) {
 				$outlet = $this->outlet_model->getFirstOutlet();
 				foreach($_POST['points'] as $cnt => $qty) {
 					if($_POST['title'][$cnt] != '') {
-						$data = array(
-							'business_id' => $this->session->userdata('business_id'),
-							'outlet_id' => $outlet->id,
-							'points' => $qty,
-							'title' => $_POST['title'][$cnt],
-							'details' => $_POST['title'][$cnt],
-							'is_active' => 1,
-							'is_deleted' => 0
-							);
+						// check if quantity is already used
+						if($this->reward_model->qtyExists($qty, $outlet->id)) {
+							$errors = true;
+						} else {
+							$data = array(
+								'business_id' => $this->session->userdata('business_id'),
+								'outlet_id' => $outlet->id,
+								'points' => $qty,
+								'title' => $_POST['title'][$cnt],
+								'details' => $_POST['title'][$cnt],
+								'is_active' => 1,
+								'is_deleted' => 0
+								);
 
-						$this->reward_model->addReward($data);
+							$this->reward_model->addReward($data);
+						}
 					}
 					
 				}
-				$this->session->set_flashdata('success', 'Woohoo, your rewards have been saved.');
-				redirect('dashboard/edit_rewards');
+				if($errors == true) {
+					// some quantities already existed
+					$this->session->set_flashdata('error', 'Some rewards have not been saved because their points quantity already existed.');
+					redirect('dashboard/edit_rewards');
+				} else {
+					$this->session->set_flashdata('success', 'Woohoo, your rewards have been saved.');
+					redirect('dashboard/edit_rewards');
+				}
 				
 			} else {
 				$this->session->set_flashdata('error', 'You need to enter your reward details');
@@ -356,6 +368,7 @@ class Dashboard extends CI_Controller {
 	{
 		$this->loadGoCardless();
 		
+		$data['business'] = $this->business_model->getBusiness($this->session->userdata('business_id'));
 		$data['payment'] = $this->business_model->getPaymentDetails($this->session->userdata('business_id'));
 		$data['plan'] = $this->business_model->getPlanDetails($data['payment']->plan_id);
 		$data['subscription'] = GoCardless_Subscription::find($data['payment']->resource_id);
@@ -363,6 +376,32 @@ class Dashboard extends CI_Controller {
 		$data['slider'] = 'template/blank-slider';
 		$data['main'] = 'dashboard/my_plan';
 		$this->load->view('template/template', $data);
+	}
+
+	public function change_password()
+	{
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+		$this->form_validation->set_rules('conf_password', 'Password Confirmation', 'required|matches[password]');
+		if($this->form_validation->run() == false) {
+			$this->loadGoCardless();		
+			$data['business'] = $this->business_model->getBusiness($this->session->userdata('business_id'));
+			$data['payment'] = $this->business_model->getPaymentDetails($this->session->userdata('business_id'));
+			$data['plan'] = $this->business_model->getPlanDetails($data['payment']->plan_id);
+			$data['subscription'] = GoCardless_Subscription::find($data['payment']->resource_id);
+			$data['slider_title'] = "Your Details";
+			$data['slider'] = 'template/blank-slider';
+			$data['main'] = 'dashboard/my_plan';
+			$this->load->view('template/template', $data);
+		} else {
+			$pass = $this->input->post('password');
+			$sec_pass = md5($pass);
+			$this->business_model->updatePassword($this->session->userdata('business_id'), $sec_pass);
+
+			// send them an email to let them know it has been changed
+			
+			$this->session->set_flashdata('success', 'Your password has been changed successfully.');
+			redirect('dashboard/my_plan');
+		}
 	}
 	
 	
