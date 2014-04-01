@@ -9,7 +9,13 @@
 
 					<section id="info" class="row">
 						<div class="col-sm-8">
-						<?php if($this->router->fetch_class() === $this->router->default_controller) { // only show map on main pages ?>
+						<?php if($this->session->userdata('is_logged')){ ?>
+								<ul class="footer-icons">
+									<li class="btn btn-info"><a href="<?php echo base_url(); ?>dashboard">Dashboard</a></li>
+									<li class="btn btn-warning"><a href="<?php echo base_url(); ?>dashboard">Support</a></li>
+								</ul>
+								
+						<?php } else { ?>
 							<!--== Social Icons ==-->
 							<ul class="social-icons">
 								<li><a href="#" class="fa fa-facebook"></a></li>
@@ -31,8 +37,7 @@
 		</footer>
 
 		<!--== Javascript Files ==-->
-		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-		
+		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>		
 		<script src="<?php echo base_url(); ?>js/bootstrap.js"></script>
 		<script src="<?php echo base_url(); ?>js/jquery.scrollTo.js"></script>
 		<script src="<?php echo base_url(); ?>js/jquery.nav.js"></script>

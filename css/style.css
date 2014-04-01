@@ -844,6 +844,31 @@ Social Icons =======*/
 	color: #ffffff;
 }
 
+/*--------------------
+Logged In Footer Icons =======*/
+.footer-icons {
+	margin: 0 0 20px 0;
+	padding: 0;
+	list-style: none;
+	overflow: hidden;
+}
+
+.footer-icons li {
+	float: left;
+	margin: 0 10px 10px 0;
+}
+
+.footer-icons li a {
+    color: #fff;
+    line-height: 4rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.social-icons li a:hover {
+	color: #ffffff;
+}
+
 
 
 /*--------------------

@@ -85,7 +85,16 @@ class Dashboard extends CI_Controller {
 				'image' => $photo['file_name'],
 				'is_active' => $is_active
 				);
-			$this->outlet_model->saveOutlet($data);
+			$oid = $this->outlet_model->saveOutlet($data);
+			
+			// set default outlet settings
+			$os_data = array(
+				'outlet_id' => $oid,
+				'checkin_points' => 5,
+				'min_checkin_period' => 12,
+				'new_customer_bonus' => 0
+			);
+			$this->db->insert('outlet_settings', $os_data);
 
 			$this->session->set_flashdata('success', 'Your outlet has been saved');
 			redirect('dashboard');
@@ -170,6 +179,42 @@ class Dashboard extends CI_Controller {
 
 			$this->session->set_flashdata('success', 'Your outlet has been updated');
 			redirect('dashboard');
+		}
+	}
+	
+	public function outlet_settings()
+	{
+		$outlet = $this->outlet_model->getFirstOutlet();
+		$data['os'] = $this->outlet_model->getOutletSettings($outlet->id);
+		$data['slider_title'] = "Your Outlet Settings";
+		$data['slider'] = 'template/blank-slider';
+		$data['main'] = 'dashboard/edit_outlet_settings';
+		$this->load->view('template/template', $data);
+	}
+	
+	public function update_outlet_settings()
+	{
+		$this->form_validation->set_rules('checkin_points', 'Check In Points', 'required|numeric');
+		$this->form_validation->set_rules('min_checkin_period', 'Minimum Check In Period', 'required|numeric');
+		$this->form_validation->set_rules('new_customer_bonus', 'New Customer Bonus', 'required|numeric');
+		
+		if($this->form_validation->run() == false) {
+			$outlet = $this->outlet_model->getFirstOutlet();
+			$data['os'] = $this->outlet_model->getOutletSettings($outlet->id);
+			$data['slider_title'] = "Your Outlet Settings";
+			$data['slider'] = 'template/blank-slider';
+			$data['main'] = 'dashboard/edit_outlet_settings';
+			$this->load->view('template/template', $data);
+		} else {
+			$data = array(
+				'checkin_points' => $this->input->post('checkin_points'),
+				'min_checkin_period' => $this->input->post('min_checkin_period'),
+				'new_customer_bonus' => $this->input->post('new_customer_bonus')
+			);
+			$this->outlet_model->updateOutletSettings($this->input->post('outlet_s_id'), $data);
+			
+			$this->session->set_flashdata('success', 'Your outlet settings have been updated');
+			redirect('dashboard/outlet_settings');
 		}
 	}
 

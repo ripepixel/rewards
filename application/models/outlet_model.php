@@ -48,8 +48,9 @@ class Outlet_model extends CI_Model {
 
     function saveOutlet($data)
 	{
-		$this->db->insert('outlets', $data);
-		return true;
+		$q = $this->db->insert('outlets', $data);
+		$id = $q->insert_id();
+		return $id;
 	}
 
 	function updateOutlet($oid, $data)
@@ -57,6 +58,24 @@ class Outlet_model extends CI_Model {
 		$this->db->where('id', $oid);
 		$this->db->where('business_id', $this->session->userdata('business_id'));
 		$this->db->update('outlets', $data);
+		return true;
+	}
+	
+	function getOutletSettings($oid)
+	{
+		$this->db->where('outlet_id', $oid);
+		$q = $this->db->get('outlet_settings');
+		if($q->num_rows() == 1) {
+			return $q->row();
+		} else {
+			return false;
+		}
+	}
+	
+	function updateOutletSettings($oid, $data)
+	{
+		$this->db->where('id', $oid);
+		$this->db->update('outlet_settings', $data);
 		return true;
 	}
 
