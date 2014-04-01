@@ -14,6 +14,8 @@
 		<link href="<?php echo base_url(); ?>css/fancySelect.css" rel="stylesheet" media="screen">
 		<link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet" media="screen">
 
+		<script src="<?php echo base_url(); ?>js/jquery-2.1.0.min.js"></script>
+
 		<!--== Google Fonts ==-->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Belgrano' rel='stylesheet' type='text/css'>

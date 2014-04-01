@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 31, 2014 at 03:55 PM
+-- Generation Time: Apr 01, 2014 at 03:44 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `rewards` (
   `is_active` int(1) NOT NULL DEFAULT '0',
   `is_deleted` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `rewards`
@@ -239,8 +239,24 @@ INSERT INTO `rewards` (`id`, `outlet_id`, `business_id`, `points`, `title`, `det
 (5, 9, 2, 100, 'Get a free soup and roll', 'Get a free soup and roll', 1, 0),
 (6, 9, 2, 150, 'Get something', 'Get something', 1, 0),
 (7, 9, 2, 200, 'Get something else', 'Get something else', 1, 0),
-(8, 9, 2, 500, 'Get some', 'Get some', 1, 0),
-(9, 9, 2, 1000, 'Test', 'Test', 1, 0);
+(8, 9, 2, 500, 'Git sum', 'Get some', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transactions`
+--
+
+CREATE TABLE IF NOT EXISTS `transactions` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL,
+  `outlet_id` int(10) NOT NULL,
+  `reward_id` int(10) NOT NULL,
+  `points` int(5) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

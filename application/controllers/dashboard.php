@@ -104,7 +104,7 @@ class Dashboard extends CI_Controller {
 			$data['outlet'] = $this->outlet_model->getOutlet($oid);
 		}
 
-		$data['slider_title'] = "Update Your Outlet";
+		$data['slider_title'] = "Your Outlet";
 		$data['slider'] = 'template/blank-slider';
 		$data['main'] = 'dashboard/edit_outlet';
 		$this->load->view('template/template', $data);
@@ -120,7 +120,7 @@ class Dashboard extends CI_Controller {
 		$this->form_validation->set_rules('email', 'Public Email', 'valid_email');
 		
 		if($this->form_validation->run() == false) {
-			$data['slider_title'] = "Create Your Outlet";
+			$data['slider_title'] = "Update Your Outlet";
 			$data['slider'] = 'template/blank-slider';
 			$data['main'] = 'dashboard/new_outlet';
 			$this->load->view('template/template', $data);
@@ -231,12 +231,61 @@ class Dashboard extends CI_Controller {
 	{
 		$outlet = $this->outlet_model->getFirstOutlet();
 		$data['rewards'] = $this->reward_model->getRewards($outlet->id);
-		$data['slider_title'] = "Update Your Rewards";
+		$data['slider_title'] = "Your Rewards";
 		$data['slider'] = 'template/blank-slider';
 		$data['main'] = 'dashboard/edit_rewards';
 		$this->load->view('template/template', $data);
 	}
-	
+
+	public function update_reward()
+	{
+		if(!empty($_POST['ok'])) {
+			// add rewards
+			$errors = false;
+			if(!empty($_POST['modal_points'])) {
+				$outlet = $this->outlet_model->getFirstOutlet();
+				if($_POST['modal_name'] != '') {
+					// check if quantity is already used
+					if($this->reward_model->qtyExists($qty, $outlet->id)) {
+						$errors = true;
+					} else {
+						$data = array(
+							'points' => $_POST['modal_points'],
+							'title' => $_POST['modal_name'],
+							);
+
+						$this->reward_model->updateReward($_POST['rid'], $data);
+					}
+				}
+				if($errors == true) {
+					// some quantities already existed
+					$this->session->set_flashdata('error', 'The reward has not been saved because the points quantity already existed.');
+					redirect('dashboard/edit_rewards');
+				} else {
+					$this->session->set_flashdata('success', 'Your reward have been saved.');
+					redirect('dashboard/edit_rewards');
+				}
+				
+			} else {
+				$this->session->set_flashdata('error', 'You need to enter your reward details');
+				redirect('dashboard/edit_rewards');
+			}
+		}
+	}
+
+	public function delete_reward()
+	{
+		$rid = $this->uri->segment(3);
+		if($this->reward_model->deleteReward($rid) == true) {
+			$this->session->set_flashdata('success', 'The reward has been deleted');
+			redirect('dashboard/edit_rewards');
+		} else {
+			$this->session->set_flashdata('error', 'There was an error deleting your reward');
+			redirect('dashboard/edit_rewards');
+		}
+	}
+
+
 	public function pay_for_plan()
 	{
 		# check not already paid
@@ -421,7 +470,14 @@ class Dashboard extends CI_Controller {
 	}
 
 
+	function getReward()
+	{
+		$id = $_POST['id'];
+		$reward = $this->reward_model->getReward($id);
+		echo json_encode($reward);
 
+	}
+	
 
 
 

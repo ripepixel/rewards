@@ -3,7 +3,7 @@
 		<div class="event-info">
 			<div class="icon fa fa-map-marker"></div>
 			<div class="info">
-				<h3><a href="<?php echo base_url(); ?>dashboard/edit_outlet">My Outlet</a></h3>
+				<h3><a href="<?php echo base_url(); ?>dashboard/edit_outlet">Your Outlet</a></h3>
 				<span>Your outlet details</span>
 			</div>
 		</div>
