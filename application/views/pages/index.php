@@ -33,7 +33,7 @@
 								<div class="icon fa fa-star-o"></div>
 								<div class="info">
 									<h3>Exclusive Offers</h3>
-									<span>Give <?php echo $this->lang->line('site_name'); ?> users exclusive promotions.</span>
+									<span>Give <?php echo $this->lang->line('site_name'); ?> users exclusive promotions and deals.</span>
 								</div>
 							</div>
 						</div>
@@ -54,7 +54,7 @@
 								<div class="icon fa fa-facebook"></div>
 								<div class="info">
 									<h3>Connect Socially</h3>
-									<span>Email your customers, directly, with targeted marketing</span>
+									<span>Connect with your customers, socially, to promote your business.</span>
 								</div>
 							</div>
 						</div>

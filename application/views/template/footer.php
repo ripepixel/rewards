@@ -27,6 +27,7 @@
 												</div>
 						<div class="col-sm-4 text-right">
 							<div class="copyrights">
+								Merchant Terms | Privacy Policy<br />
 								<?php echo $this->lang->line('site_copyright_footer'); ?>
 							</div>
 						</div>
