@@ -287,7 +287,7 @@
 
             // Go Register
             $('#goregister').click(function () {
-                $('html, body').scrollTo($('#register'), 300);
+                $('html, body').scrollTo($('#prices'), 300);
             });
 
             // Placeholder for MailChimp Form

@@ -7,7 +7,7 @@
 					</div>
 					<div class="row">
 						<div class="blk">
-							<input type="submit" value="Register" name="submit" id="goregister">
+							<input type="submit" value="Pricing &amp; Register" name="submit" id="goregister">
 						</div>
 					</div>
 				</div>

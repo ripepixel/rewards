@@ -140,6 +140,38 @@ class Businesses extends CI_Controller {
 		$this->session->set_flashdata('success', 'You are now signed out.');
 		redirect('businesses/signin');
 	}
+
+	public function forgot_password()
+	{
+		$data['slider_title'] = "Reset Your Password";
+		$data['slider'] = 'template/blank-slider';
+		$data['main'] = 'businesses/forgot_password';
+		$this->load->view('template/template', $data);
+	}
+
+	public function reset_password()
+	{
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_check_email_exists');
+
+		if($this->form_validation->run() == false) {
+			$data['slider_title'] = "Reset Your Password";
+			$data['slider'] = 'template/blank-slider';
+			$data['main'] = 'businesses/forgot_password';
+			$this->load->view('template/template', $data);
+		} else {
+			// reset password
+			$pass = $this->createRandomPassword(8);
+			$sec_pass = md5($pass);
+
+			$this->business_model->updatePassword($this->session->userdata('business_id'), $sec_pass);
+
+			// send email with new password
+
+			$this->session->set_flashdata('success', 'Your new password has been emailed to you.');
+			redirect('businesses/signin');
+
+		}
+	}
 	
 	
 	
@@ -159,6 +191,18 @@ class Businesses extends CI_Controller {
 
 	    return $pass; 
 
+	}
+
+	function check_email_exists($str)
+	{
+		$exists = $this->business_model->checkEmailExists($str);
+
+		if($exists) {
+			return true;
+		} else {
+			$this->form_validation->set_message('check_email_exists', 'That email address is not registered on our systems. Please check and try again.');
+			return FALSE;
+		}
 	}
 
 

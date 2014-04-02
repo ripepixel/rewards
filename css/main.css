@@ -395,6 +395,31 @@ h6,
 p {
   margin: 0 0 10px;
 }
+
+.mtop10 {
+  margin-top: 10px;
+}
+
+.mtop20 {
+  margin-top: 20px;
+}
+
+.mtop30 {
+  margin-top: 30px;
+}
+
+.mbottom10 {
+  margin-bottom: 10px;
+}
+
+.mbottom20 {
+  margin-bottom: 20px;
+}
+
+.mbottom30 {
+  margin-bottom: 30px;
+}
+
 .lead {
   margin-bottom: 20px;
   font-size: 16px;

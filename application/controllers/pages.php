@@ -36,4 +36,16 @@ Message; ".$message."
 		$this->email->send();
 
 	}
+
+	public function payment_options()
+	{
+		$data['slider_title'] = "Payment Options";
+		$data['slider'] = 'template/blank-slider';
+		$data['main'] = 'pages/payment_options';
+		$this->load->view('template/template', $data);
+	}
+
+
+
+
 }

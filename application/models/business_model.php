@@ -138,6 +138,17 @@ class Business_model extends CI_Model {
 			}
 		}
 
+	function checkEmailExists($email)
+	{
+		$this->db->where('email', $email);
+		$q = $this->db->get('businesses');
+
+		if($q->num_rows() == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 
 }

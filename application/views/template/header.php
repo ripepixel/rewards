@@ -25,9 +25,8 @@
 								<li class="signout"><a href="<?php echo base_url(); ?>businesses/signout">Sign out</a></li>
 							<?php } else { ?>
 							<li><a href="<?php echo base_url(); ?>">Home</a></li>
-							<li><a href="<?php echo base_url(); ?>#schedule">Schedule</a></li>
-							<li><a href="<?php echo base_url(); ?>#faq">FAQ</a></li>
 							<li><a href="<?php echo base_url(); ?>#prices">Pricing</a></li>
+							<li><a href="<?php echo base_url(); ?>#faq">FAQ</a></li>
 							<li><a href="<?php echo base_url(); ?>blog/">Blog</a></li>
 							<li><a href="<?php echo base_url(); ?>pages/contact">Contact</a></li>
 							<li class="current"><a href="<?php echo base_url(); ?>businesses/register">Register</a></li>
