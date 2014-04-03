@@ -107,6 +107,20 @@ class Reward_model extends CI_Model {
         }
     }
 
+		function getOffer($oid)
+    {
+        $this->db->where('id', $oid);
+        $this->db->where('business_id', $this->session->userdata('business_id'));
+        $this->db->where('is_deleted', 0);
+
+        $q = $this->db->get('offers');
+        if($q->num_rows() > 0) {
+            return $q->row();
+        } else {
+            return false;
+        }
+    }
+
 
 
 

@@ -589,6 +589,14 @@ class Dashboard extends CI_Controller {
 
 	}
 	
+	function getOffer()
+	{
+		$id = $_POST['id'];
+		$offer = $this->reward_model->getOffer($id);
+		echo json_encode($offer);
+
+	}
+	
 
 
 

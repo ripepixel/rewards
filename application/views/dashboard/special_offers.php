@@ -37,7 +37,7 @@
 							<td><?php echo "&pound;".$offer['offer_price']; ?></td>
 							<td><?php echo date('d/m/Y', strtotime($offer['start_date'])); ?></td>
 							<td><?php echo date('d/m/Y', strtotime($offer['expiry_date'])); ?></td>
-							<td>Stats| Edit | Expire | Delete</td>
+							<td>Stats| <a class="edit-offer" data-toggle="modal" data-id="<?php echo $offer['id']; ?>" href="#editOfferModal"><i class="rewards edit fa fa-pencil"></i></a> | Expire | Delete</td>
 							</tr>
 						<?php 
 							}
@@ -63,6 +63,32 @@ function doconfirm()
     }
 }
 
+$(document).on("click", ".edit-offer", function () {
+     var offerId = $(this).data('id');
+     $.ajax({
+     	type: "POST",
+     	url: "getOffer",
+     	data: {id:offerId},
+     	dataType: 'json',
+     	success: function(data) {
+     		$("#o_title").val( data.title );
+				$("#o_start_date").val(data.start_date);
+				$("#o_expiry_date").val( data.expiry_date );
+				$("#o_original_price").val( data.original_price );
+				$("#o_offer_price").val( data.offer_price );
+     		$("#o_terms").val( data.terms );
+				$('#offer_image img').remove();
+				$("<img/>").prependTo("#offer_image").attr({
+					src: "<?php echo base_url(); ?>uploads/offers/"+data.image,
+					alt: '',
+					width: '150'
+				});
+     		$("#oid").val( data.id );
+     	}
+     });
+     
+});
+
 </script>
 
 <div class="modal fade" id="offerModal">
@@ -75,23 +101,23 @@ function doconfirm()
       <div class="modal-body">
       <form class="form" action="<?php echo base_url(); ?>dashboard/save_offer" method="post" enctype="multipart/form-data">
         <div class="col-md-12 col-sm-12">
-        	<input type="text" name="title" id="title" placeholder="Offer Title" required>
+        	<input type="text" name="title" id="title" placeholder="Offer Title" value="" required>
         	<?php echo form_error('title'); ?>
         </div>
         <div class="col-md-6 col-sm-12">
-        	<input type="text" name="start_date" id="start_date" placeholder="Start Date (dd/mm/yyyy)" required>
+        	<input type="text" name="start_date" id="start_date" placeholder="Start Date (dd/mm/yyyy)" value="" required>
         	<?php echo form_error('start_date'); ?>
         </div>
         <div class="col-md-6 col-sm-12">
-        	<input type="text" name="expiry_date" id="expiry_date" placeholder="Expiry Date (dd/mm/yyyy)" required>
+        	<input type="text" name="expiry_date" id="expiry_date" placeholder="Expiry Date (dd/mm/yyyy)" value="" required>
         	<?php echo form_error('expiry_date'); ?>
         </div>
         <div class="col-md-6 col-sm-12">
-        	<input type="text" name="original_price" id="original_price" placeholder="Original Price" required>
+        	<input type="text" name="original_price" id="original_price" placeholder="Original Price" value="" required>
         	<?php echo form_error('original_price'); ?>
         </div>
         <div class="col-md-6 col-sm-12">
-        	<input type="text" name="offer_price" id="offer_price" placeholder="Offer Price" required>
+        	<input type="text" name="offer_price" id="offer_price" placeholder="Offer Price" value="" required>
         	<?php echo form_error('offer_price'); ?>
         </div>
         <div class="col-md-12 col-sm-12">
@@ -105,6 +131,56 @@ function doconfirm()
         <div class="col-md-3 col-sm-12">
         	<input type="submit" name="ok" value="Save">
         </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editOfferModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Edit Special Offer</h4>
+      </div>
+      <div class="modal-body">
+      <form class="form" action="<?php echo base_url(); ?>dashboard/update_offer" method="post">
+        <div class="col-md-12 col-sm-12">
+        	<input type="text" name="o_title" id="o_title" placeholder="Offer Title" required>
+        	<?php echo form_error('title'); ?>
+        </div>
+        <div class="col-md-6 col-sm-12">
+        	<input type="text" name="o_start_date" id="o_start_date" placeholder="Start Date (dd/mm/yyyy)" required>
+        	<?php echo form_error('start_date'); ?>
+        </div>
+        <div class="col-md-6 col-sm-12">
+        	<input type="text" name="o_expiry_date" id="o_expiry_date" placeholder="Expiry Date (dd/mm/yyyy)" required>
+        	<?php echo form_error('expiry_date'); ?>
+        </div>
+        <div class="col-md-6 col-sm-12">
+        	<input type="text" name="o_original_price" id="o_original_price" placeholder="Original Price" required>
+        	<?php echo form_error('original_price'); ?>
+        </div>
+        <div class="col-md-6 col-sm-12">
+        	<input type="text" name="o_offer_price" id="o_offer_price" placeholder="Offer Price" required>
+        	<?php echo form_error('offer_price'); ?>
+        </div>
+        <div class="col-md-12 col-sm-12">
+        	<textarea name="o_terms" id="o_terms" placeholder="Terms and conditions"></textarea>
+        	<?php echo form_error('terms'); ?>
+        </div>
+				<div class="col-md-4 col-sm-6" id="offer_image">
+					<label for="image">Current image</label>
+				</div>
+        <div class="col-md-8 col-sm-6">
+        	<input name="photo" id="photo" type="file" placeholder="Add a logo">
+        </div>
+        <input type="hidden" name="oid" id="oid" value="">
+        <div class="col-md-3 col-sm-12"><input type="submit" name="ok" value="Save"></div>
       </form>
       </div>
       <div class="modal-footer">

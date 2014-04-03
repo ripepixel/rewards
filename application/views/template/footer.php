@@ -40,6 +40,7 @@
 		<!--== Javascript Files ==-->
 		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>		
 		<script src="<?php echo base_url(); ?>js/bootstrap.js"></script>
+		<script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 		<script src="<?php echo base_url(); ?>js/jquery.scrollTo.js"></script>
 		<script src="<?php echo base_url(); ?>js/jquery.nav.js"></script>
 		<script src="<?php echo base_url(); ?>js/owl.carousel.min.js"></script>
