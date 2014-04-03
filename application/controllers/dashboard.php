@@ -330,6 +330,72 @@ class Dashboard extends CI_Controller {
 		}
 	}
 
+	public function special_offers()
+	{
+		$data['offers'] = $this->reward_model->getOffers();
+		$data['slider_title'] = "Your Special Offers";
+		$data['slider'] = 'template/blank-slider';
+		$data['main'] = 'dashboard/special_offers';
+		$this->load->view('template/template', $data);
+	}
+
+	public function save_offer()
+	{
+		$this->form_validation->set_rules('title', 'Offer Title', 'required');
+		$this->form_validation->set_rules('start_date', 'Start Date', 'required');
+		$this->form_validation->set_rules('expiry_date', 'Expiry Date', 'required');
+		$this->form_validation->set_rules('original_price', 'Original Price', 'required');
+		$this->form_validation->set_rules('offer_price', 'Offer Price', 'required');
+		$this->form_validation->set_rules('terms', 'Terms and Conditions', 'required');
+		
+		if($this->form_validation->run() == false) {
+			$data['offers'] = $this->reward_model->getOffers();
+			$data['slider_title'] = "Your Special Offers";
+			$data['slider'] = 'template/blank-slider';
+			$data['main'] = 'dashboard/special_offers';
+			$this->load->view('template/template', $data);
+		} else {
+			// File Upload
+			$photo['file_name'] = '';
+			if(!empty($_FILES['photo']['name'])) {
+				$config = array();
+				$config['upload_path'] = './uploads/offers/'; // where the files are uploaded to
+	            $config['allowed_types'] = 'gif|jpg|png';
+	            $config['max_size'] = '1000';
+	            $config['max_width'] = '2000';
+	            $config['max_height'] = '1000';
+	            $config['max_filename'] = '100';
+
+	            $this->load->library('upload', $config);
+	            
+				if($this->upload->do_upload('photo')) {
+					$photo = $this->upload->data();
+				} else {
+					// file upload failed
+					$this->session->set_flashdata('error', 'There was an error with the file upload'. $this->upload->display_errors());
+				}
+			}
+			$outlet = $this->outlet_model->getFirstOutlet();
+
+			$data = array(
+				'business_id' => $this->session->userdata('business_id'),
+				'outlet_id' => $outlet->id,
+				'title' => $this->input->post('title'),
+				'start_date' => date("Y-m-d", strtotime($this->input->post('start_date'))),
+				'expiry_date' => date("Y-m-d", strtotime($this->input->post('expiry_date'))),
+				'original_price' => $this->input->post('original_price'),
+				'offer_price' => $this->input->post('offer_price'),
+				'terms' => $this->input->post('terms'),
+				'image' => $photo['file_name'],
+				'is_deleted' => 0
+				);
+			$this->reward_model->saveOffer($data);
+
+			$this->session->set_flashdata('success', 'Your offer has been saved');
+			redirect('dashboard/special_offers');
+		}
+	}
+
 
 	public function pay_for_plan()
 	{

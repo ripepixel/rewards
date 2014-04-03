@@ -33,7 +33,7 @@
 				<div class='row'>
 					<div class="col-md-12 col-sm-12">
 						<div class='alert alert-danger'>
-							There were errors with the information. Please check the errors below.
+							There were errors with the information. Please check all required fields are completed.
 						</div>
 					</div>
 				</div>

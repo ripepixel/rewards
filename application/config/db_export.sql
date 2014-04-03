@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 02, 2014 at 03:03 PM
+-- Generation Time: Apr 03, 2014 at 03:51 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -110,6 +110,35 @@ CREATE TABLE IF NOT EXISTS `cards` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `offers`
+--
+
+CREATE TABLE IF NOT EXISTS `offers` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `business_id` int(10) NOT NULL,
+  `outlet_id` int(10) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `start_date` date NOT NULL,
+  `expiry_date` date NOT NULL,
+  `original_price` decimal(8,2) NOT NULL,
+  `offer_price` decimal(8,2) NOT NULL,
+  `terms` text NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `is_deleted` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `offers`
+--
+
+INSERT INTO `offers` (`id`, `business_id`, `outlet_id`, `title`, `start_date`, `expiry_date`, `original_price`, `offer_price`, `terms`, `image`, `is_deleted`) VALUES
+(2, 2, 9, 'Test Special Offer', '2014-04-03', '2014-04-30', '19.99', '4.99', 'Some terms and conditions', 'itsapetthing.png', 0),
+(3, 2, 9, 'Another Test', '2014-04-01', '2014-04-25', '19.99', '4.99', 'some terms', '', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `outlets`
 --
 
@@ -181,16 +210,20 @@ CREATE TABLE IF NOT EXISTS `plans` (
   `active` int(1) NOT NULL,
   `is_visible` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `plans`
 --
 
 INSERT INTO `plans` (`id`, `title`, `setup_fee`, `price`, `interval_length`, `interval_unit`, `cancel_after`, `active`, `is_visible`) VALUES
-(1, 'App Only', '0.00', '9.99', 1, 'month', 12, 1, 1),
-(2, 'Basic', '0.00', '24.99', 1, 'month', 12, 1, 1),
-(3, 'Pro', '0.00', '29.99', 1, 'month', 12, 1, 1);
+(1, 'App Only', '0.00', '9.99', 1, 'month', 12, 1, 0),
+(2, 'Basic', '0.00', '24.99', 1, 'month', 12, 1, 0),
+(3, 'Pro', '0.00', '29.99', 1, 'month', 12, 1, 0),
+(4, 'One+', '0.00', '29.99', 1, 'month', 12, 1, 1),
+(5, 'One+', '49.00', '24.99', 1, 'month', 12, 1, 1),
+(6, 'One +', '99.00', '19.99', 1, 'month', 6, 1, 1),
+(7, 'One +', '149.00', '14.99', 1, 'month', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -236,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `rewards` (
   `is_active` int(1) NOT NULL DEFAULT '0',
   `is_deleted` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `rewards`

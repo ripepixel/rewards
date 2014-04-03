@@ -88,7 +88,24 @@ class Reward_model extends CI_Model {
         }
     }
 
+    function saveOffer($data)
+    {
+        $this->db->insert('offers', $data);
+        return true;
+    }
 
+    function getOffers()
+    {
+        $this->db->where('business_id', $this->session->userdata('business_id'));
+        $this->db->where('is_deleted', 0);
+        $this->db->order_by('expiry_date', 'ASC');
+        $q = $this->db->get('offers');
+        if($q->num_rows() > 0) {
+            return $q->result_array();
+        } else {
+            return false;
+        }
+    }
 
 
 

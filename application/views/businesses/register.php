@@ -28,7 +28,7 @@
 							<div class="col-md-12 col-sm-12">
 								<select name="plan" id="plan">
 									<?php foreach($plans as $plan) { ?>
-										<option value="<?php echo $plan['id']; ?>"><?php echo $plan['title']; ?> - &pound;<?php echo $plan['price']; ?> /month</option>
+										<option value="<?php echo $plan['id']; ?>"><?php echo $plan['title']; ?> Plan - <?php echo $set_up = $plan['setup_fee'] > 0 ? "&pound;".$plan['setup_fee']." + " : "" ?> &pound;<?php echo $plan['price']; ?> /month</option>
 									<?php } ?>
 								</select>
 							</div>

@@ -18,6 +18,7 @@ class General_model extends CI_Model {
     function getPlans()
     {
     	$this->db->where('active', 1);
+        $this->db->where('is_visible', 1);
     	$q = $this->db->get('plans');
     	if($q->num_rows() > 0) {
     		return $q->result_array();
