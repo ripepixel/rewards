@@ -84,7 +84,7 @@
 							<div class="icon fa fa-star-o"></div>
 							<div class="info">
 								<h3><a href="<?php echo base_url(); ?>dashboard/edit_rewards">Your Rewards</a></h3>
-								<span>Your rewards</span>
+								<span>Your rewards and offers</span>
 							</div>
 						</div>
 					</div>

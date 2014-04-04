@@ -11,7 +11,9 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
+              <th>Status</th>
 							<th>Title</th>
+              <th>Original Price</th>
 							<th>Offer Price</th>
 							<th>Starts</th>
 							<th>Expires</th>
@@ -25,19 +27,28 @@
 								if(strtotime($offer['start_date']) < time() && strtotime($offer['expiry_date']) > time()) {
 									// Active
 									$class = 'success';
+                  $status = 'Active';
 								} elseif(strtotime($offer['expiry_date']) < time()) {
 									// Expired
-									$class='warning';
+									$class='danger';
+                  $status = 'Expired';
 								} else {
 									$class = '';
+                  $status = 'Waiting';
 								}
 						?>
 							<tr class="<?php echo $class; ?>">
-							<td><?php echo $offer['title']; ?></td>
+							<td><?php echo $status; ?></td>
+              <td><?php echo $offer['title']; ?></td>
+              <td><?php echo "&pound;".$offer['original_price']; ?></td>
 							<td><?php echo "&pound;".$offer['offer_price']; ?></td>
 							<td><?php echo date('d/m/Y', strtotime($offer['start_date'])); ?></td>
 							<td><?php echo date('d/m/Y', strtotime($offer['expiry_date'])); ?></td>
-							<td>Stats| <a class="edit-offer" data-toggle="modal" data-id="<?php echo $offer['id']; ?>" href="#editOfferModal"><i class="rewards edit fa fa-pencil"></i></a> | Expire | Delete</td>
+							<td>
+              <i class="offers stats fa fa-bar-chart-o" title="Statistics"></i> 
+              <?php if($class =="success" || $class == '') { ?> <a class="edit-offer" data-toggle="modal" data-id="<?php echo $offer['id']; ?>" href="#editOfferModal"><i class="offers edit fa fa-pencil" title="Edit"></i></a> <?php } ?>
+              <?php if($class =="success" || $class == '') { ?><i class="offers expire fa fa-clock-o" title="Expire Offer Now"></i> <?php } ?>
+              <i class="offers delete fa fa-times" title="Delete"></i></td>
 							</tr>
 						<?php 
 							}

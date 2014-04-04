@@ -3117,7 +3117,7 @@ table th[class*="col-"] {
   border-bottom-color: #ebccd1;
 }
 
-i.rewards {
+i.rewards, i.offers {
   font-size: 1.5em;
   margin-right: 10px;
 }
@@ -3132,6 +3132,10 @@ i.edit {
 
 i.stats {
   color: #3c763d;
+}
+
+i.expire {
+  color: #f0ad4e;
 }
 
 /* Buttons */

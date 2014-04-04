@@ -98,7 +98,7 @@ class Reward_model extends CI_Model {
     {
         $this->db->where('business_id', $this->session->userdata('business_id'));
         $this->db->where('is_deleted', 0);
-        $this->db->order_by('expiry_date', 'ASC');
+        $this->db->order_by('expiry_date', 'DESC');
         $q = $this->db->get('offers');
         if($q->num_rows() > 0) {
             return $q->result_array();
