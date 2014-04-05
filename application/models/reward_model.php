@@ -75,6 +75,23 @@ class Reward_model extends CI_Model {
     	}
     }
 
+		function getRandomRewards($oid)
+		{
+			$this->db->where('outlet_id', $oid);
+    	$this->db->where('business_id', $this->session->userdata('business_id'));
+    	$this->db->where('is_deleted', 0);
+			//$this->db->order_by('points', 'ASC');
+			$this->db->order_by('id', 'RANDOM');
+			$this->db->limit(5);
+			
+			$q = $this->db->get('rewards');
+    	if($q->num_rows() > 0) {
+    		return $q->result_array();
+    	} else {
+    		return false;
+    	}
+		}
+
     function qtyExists($qty, $oid)
     {
         $this->db->where('points', $qty);
@@ -93,6 +110,47 @@ class Reward_model extends CI_Model {
         $this->db->insert('offers', $data);
         return true;
     }
+
+		function updateOffer($oid, $data)
+    {
+      $this->db->where('id', $oid);
+  		$this->db->where('business_id', $this->session->userdata('business_id'));
+			$this->db->update('offers', $data);
+      return true;
+    }
+
+		function deleteOffer($oid)
+		{
+			// need to check if there are any instances of the offer in the users_offers table (when it exists)
+			// if there are, just set is_deleted = 1
+			// otherwise, delete completely
+			$this->db->where('id', $oid);
+			$this->db->where('business_id', $this->session->userdata('business_id'));
+			$q = $this->db->get('offers');
+			$row = $q->row();
+			
+			$image = $q->image;
+			
+			unlink('./uploads/offers/'.$image);
+			
+			$this->db->where('id', $row->id);
+			$this->db->delete('offers');
+			
+			return true;
+		}
+		
+		function expireOffer($oid)
+		{
+			$this->db->where('id', $oid);
+			$this->db->where('business_id', $this->session->userdata('business_id'));
+			$expiry = date('Y-m-d', time() - 86400);
+			$data = array(
+				'expiry_date' => $expiry
+			);
+			$this->db->update('offers', $data);
+			
+			return true;
+		}
 
     function getOffers()
     {

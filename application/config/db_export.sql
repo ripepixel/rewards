@@ -1,20 +1,18 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 03, 2014 at 03:51 PM
--- Server version: 5.6.12-log
--- PHP Version: 5.4.16
+-- Generation Time: Apr 05, 2014 at 09:35 PM
+-- Server version: 5.5.25
+-- PHP Version: 5.4.4
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
 -- Database: `rewards`
 --
-CREATE DATABASE IF NOT EXISTS `rewards` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `rewards`;
 
 -- --------------------------------------------------------
 
@@ -22,7 +20,7 @@ USE `rewards`;
 -- Table structure for table `blog_categories`
 --
 
-CREATE TABLE IF NOT EXISTS `blog_categories` (
+CREATE TABLE `blog_categories` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
@@ -43,7 +41,7 @@ INSERT INTO `blog_categories` (`id`, `name`, `slug`, `order`) VALUES
 -- Table structure for table `blog_posts`
 --
 
-CREATE TABLE IF NOT EXISTS `blog_posts` (
+CREATE TABLE `blog_posts` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
@@ -71,7 +69,7 @@ INSERT INTO `blog_posts` (`id`, `title`, `slug`, `summary`, `content`, `image`, 
 -- Table structure for table `businesses`
 --
 
-CREATE TABLE IF NOT EXISTS `businesses` (
+CREATE TABLE `businesses` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -96,7 +94,7 @@ INSERT INTO `businesses` (`id`, `email`, `password`, `first_name`, `last_name`, 
 -- Table structure for table `cards`
 --
 
-CREATE TABLE IF NOT EXISTS `cards` (
+CREATE TABLE `cards` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
   `card_number` varchar(100) NOT NULL,
@@ -113,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `cards` (
 -- Table structure for table `offers`
 --
 
-CREATE TABLE IF NOT EXISTS `offers` (
+CREATE TABLE `offers` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `business_id` int(10) NOT NULL,
   `outlet_id` int(10) NOT NULL,
@@ -126,15 +124,7 @@ CREATE TABLE IF NOT EXISTS `offers` (
   `image` varchar(255) NOT NULL,
   `is_deleted` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `offers`
---
-
-INSERT INTO `offers` (`id`, `business_id`, `outlet_id`, `title`, `start_date`, `expiry_date`, `original_price`, `offer_price`, `terms`, `image`, `is_deleted`) VALUES
-(2, 2, 9, 'Test Special Offer', '2014-04-03', '2014-04-30', '19.99', '4.99', 'Some terms and conditions', 'itsapetthing.png', 0),
-(3, 2, 9, 'Another Test', '2014-04-01', '2014-04-25', '19.99', '4.99', 'some terms', '', 0);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -142,7 +132,7 @@ INSERT INTO `offers` (`id`, `business_id`, `outlet_id`, `title`, `start_date`, `
 -- Table structure for table `outlets`
 --
 
-CREATE TABLE IF NOT EXISTS `outlets` (
+CREATE TABLE `outlets` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `business_id` int(10) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -166,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `outlets` (
 --
 
 INSERT INTO `outlets` (`id`, `business_id`, `name`, `street`, `town`, `county`, `postcode`, `telephone`, `fax`, `email`, `website`, `twitter`, `facebook`, `image`, `is_active`) VALUES
-(9, 2, 'Test Outlet', '142 Market Street', 'Bury', 'Lancashire', 'BL8 3LS', '01204 782715', NULL, '', 'http://www.how-media.co.uk', '', '', 'ipad-store.png', 1);
+(9, 2, 'Awesome Shop', '142 Market Street', 'Bury', 'Lancashire', 'BL8 3LS', '01204 782715', NULL, '', 'http://www.how-media.co.uk', '', '', 'prev_smashing_450.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -174,7 +164,7 @@ INSERT INTO `outlets` (`id`, `business_id`, `name`, `street`, `town`, `county`, 
 -- Table structure for table `outlet_settings`
 --
 
-CREATE TABLE IF NOT EXISTS `outlet_settings` (
+CREATE TABLE `outlet_settings` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `outlet_id` int(10) NOT NULL,
   `checkin_points` int(6) DEFAULT NULL,
@@ -199,7 +189,7 @@ INSERT INTO `outlet_settings` (`id`, `outlet_id`, `checkin_points`, `min_checkin
 -- Table structure for table `plans`
 --
 
-CREATE TABLE IF NOT EXISTS `plans` (
+CREATE TABLE `plans` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `setup_fee` decimal(8,2) NOT NULL,
@@ -217,13 +207,13 @@ CREATE TABLE IF NOT EXISTS `plans` (
 --
 
 INSERT INTO `plans` (`id`, `title`, `setup_fee`, `price`, `interval_length`, `interval_unit`, `cancel_after`, `active`, `is_visible`) VALUES
-(1, 'App Only', '0.00', '9.99', 1, 'month', 12, 1, 0),
-(2, 'Basic', '0.00', '24.99', 1, 'month', 12, 1, 0),
-(3, 'Pro', '0.00', '29.99', 1, 'month', 12, 1, 0),
-(4, 'One+', '0.00', '29.99', 1, 'month', 12, 1, 1),
-(5, 'One+', '49.00', '24.99', 1, 'month', 12, 1, 1),
-(6, 'One +', '99.00', '19.99', 1, 'month', 6, 1, 1),
-(7, 'One +', '149.00', '14.99', 1, 'month', 1, 1, 1);
+(1, 'App Only', 0.00, 9.99, 1, 'month', 12, 1, 0),
+(2, 'Basic', 0.00, 24.99, 1, 'month', 12, 1, 0),
+(3, 'Pro', 0.00, 29.99, 1, 'month', 12, 1, 0),
+(4, 'One+', 0.00, 29.99, 1, 'month', 12, 1, 1),
+(5, 'One+', 49.00, 24.99, 1, 'month', 12, 1, 1),
+(6, 'One +', 99.00, 19.99, 1, 'month', 6, 1, 1),
+(7, 'One +', 149.00, 14.99, 1, 'month', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -231,7 +221,7 @@ INSERT INTO `plans` (`id`, `title`, `setup_fee`, `price`, `interval_length`, `in
 -- Table structure for table `plan_purchases`
 --
 
-CREATE TABLE IF NOT EXISTS `plan_purchases` (
+CREATE TABLE `plan_purchases` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `business_id` int(10) NOT NULL,
   `plan_id` int(3) NOT NULL,
@@ -251,7 +241,7 @@ CREATE TABLE IF NOT EXISTS `plan_purchases` (
 --
 
 INSERT INTO `plan_purchases` (`id`, `business_id`, `plan_id`, `resource_id`, `resource_type`, `resource_uri`, `signature`, `amount`, `created_at`, `status`, `is_active`) VALUES
-(3, 2, 3, '0K67DF43CY', 'subscription', 'https://sandbox.gocardless.com/api/v1/subscriptions/0K67DF43CY', '487ba62933f6c16260aac022e84af40bae093bd59ad0dec94a74b0b098d49260', '29.99', '2014-03-29T23:04:47Z', 'active', 1);
+(3, 2, 3, '0K67DF43CY', 'subscription', 'https://sandbox.gocardless.com/api/v1/subscriptions/0K67DF43CY', '487ba62933f6c16260aac022e84af40bae093bd59ad0dec94a74b0b098d49260', 29.99, '2014-03-29T23:04:47Z', 'active', 1);
 
 -- --------------------------------------------------------
 
@@ -259,7 +249,7 @@ INSERT INTO `plan_purchases` (`id`, `business_id`, `plan_id`, `resource_id`, `re
 -- Table structure for table `rewards`
 --
 
-CREATE TABLE IF NOT EXISTS `rewards` (
+CREATE TABLE `rewards` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `outlet_id` int(10) NOT NULL,
   `business_id` int(10) NOT NULL,
@@ -291,7 +281,7 @@ INSERT INTO `rewards` (`id`, `outlet_id`, `business_id`, `points`, `title`, `det
 -- Table structure for table `transactions`
 --
 
-CREATE TABLE IF NOT EXISTS `transactions` (
+CREATE TABLE `transactions` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
   `outlet_id` int(10) NOT NULL,
@@ -308,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,

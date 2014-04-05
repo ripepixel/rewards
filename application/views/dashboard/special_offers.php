@@ -47,8 +47,8 @@
 							<td>
               <i class="offers stats fa fa-bar-chart-o" title="Statistics"></i> 
               <?php if($class =="success" || $class == '') { ?> <a class="edit-offer" data-toggle="modal" data-id="<?php echo $offer['id']; ?>" href="#editOfferModal"><i class="offers edit fa fa-pencil" title="Edit"></i></a> <?php } ?>
-              <?php if($class =="success" || $class == '') { ?><i class="offers expire fa fa-clock-o" title="Expire Offer Now"></i> <?php } ?>
-              <i class="offers delete fa fa-times" title="Delete"></i></td>
+              <?php if($class =="success" || $class == '') { ?><a href="<?php echo base_url(); ?>dashboard/expire_offer/<?php echo $offer['id']; ?>" onclick="return doexpire();"><i class="offers expire fa fa-clock-o" title="Expire Offer Now"></i></a> <?php } ?>
+              <a href="<?php echo base_url(); ?>dashboard/delete_offer/<?php echo $offer['id']; ?>" onclick="return doconfirm();"><i class="offers delete fa fa-times" title="Delete"></i></a></td>
 							</tr>
 						<?php 
 							}
@@ -74,6 +74,15 @@ function doconfirm()
     }
 }
 
+function doexpire()
+{
+    msg=confirm("Are you sure you want to expire the offer?");
+    if(msg!=true)
+    {
+        return false;
+    }
+}
+
 $(document).on("click", ".edit-offer", function () {
      var offerId = $(this).data('id');
      $.ajax({
@@ -83,8 +92,18 @@ $(document).on("click", ".edit-offer", function () {
      	dataType: 'json',
      	success: function(data) {
      		$("#o_title").val( data.title );
-				$("#o_start_date").val(data.start_date);
-				$("#o_expiry_date").val( data.expiry_date );
+				var sd = new Date(data.start_date);
+				var sd_d = sd.getDate();
+				var sd_m = sd.getMonth()+1;
+				var sd_y = sd.getFullYear();
+				
+				var ed = new Date(data.expiry_date);
+				var ed_d = ed.getDate();
+				var ed_m = ed.getMonth()+1;
+				var ed_y = ed.getFullYear();
+				
+				$("#o_start_date").val( sd_d+"/"+sd_m+"/"+sd_y );
+				$("#o_expiry_date").val( ed_d+"/"+ed_m+"/"+ed_y );
 				$("#o_original_price").val( data.original_price );
 				$("#o_offer_price").val( data.offer_price );
      		$("#o_terms").val( data.terms );
@@ -132,7 +151,7 @@ $(document).on("click", ".edit-offer", function () {
         	<?php echo form_error('offer_price'); ?>
         </div>
         <div class="col-md-12 col-sm-12">
-        	<textarea name="terms" id="terms" placeholder="Terms and conditions"></textarea>
+        	<textarea name="terms" id="terms" placeholder="Terms and conditions" required></textarea>
         	<?php echo form_error('terms'); ?>
         </div>
         <div class="col-md-12 col-sm-12">
@@ -159,30 +178,30 @@ $(document).on("click", ".edit-offer", function () {
         <h4 class="modal-title" id="myModalLabel">Edit Special Offer</h4>
       </div>
       <div class="modal-body">
-      <form class="form" action="<?php echo base_url(); ?>dashboard/update_offer" method="post">
+      <form class="form" action="<?php echo base_url(); ?>dashboard/update_offer" method="post" enctype="multipart/form-data">
         <div class="col-md-12 col-sm-12">
         	<input type="text" name="o_title" id="o_title" placeholder="Offer Title" required>
-        	<?php echo form_error('title'); ?>
+        	<?php echo form_error('o_title'); ?>
         </div>
         <div class="col-md-6 col-sm-12">
         	<input type="text" name="o_start_date" id="o_start_date" placeholder="Start Date (dd/mm/yyyy)" required>
-        	<?php echo form_error('start_date'); ?>
+        	<?php echo form_error('o_start_date'); ?>
         </div>
         <div class="col-md-6 col-sm-12">
         	<input type="text" name="o_expiry_date" id="o_expiry_date" placeholder="Expiry Date (dd/mm/yyyy)" required>
-        	<?php echo form_error('expiry_date'); ?>
+        	<?php echo form_error('o_expiry_date'); ?>
         </div>
         <div class="col-md-6 col-sm-12">
         	<input type="text" name="o_original_price" id="o_original_price" placeholder="Original Price" required>
-        	<?php echo form_error('original_price'); ?>
+        	<?php echo form_error('o_original_price'); ?>
         </div>
         <div class="col-md-6 col-sm-12">
         	<input type="text" name="o_offer_price" id="o_offer_price" placeholder="Offer Price" required>
-        	<?php echo form_error('offer_price'); ?>
+        	<?php echo form_error('o_offer_price'); ?>
         </div>
         <div class="col-md-12 col-sm-12">
-        	<textarea name="o_terms" id="o_terms" placeholder="Terms and conditions"></textarea>
-        	<?php echo form_error('terms'); ?>
+        	<textarea name="o_terms" id="o_terms" placeholder="Terms and conditions" required></textarea>
+        	<?php echo form_error('o_terms'); ?>
         </div>
 				<div class="col-md-4 col-sm-6" id="offer_image">
 					<label for="image">Current image</label>

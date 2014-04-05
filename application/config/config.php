@@ -15,7 +15,7 @@
 |
 */
 $config['base_url']	= 'http://localhost/rewards/';
-//$config['base_url']	= 'http://192.168.1.6/rewards/';
+//$config['base_url']	= 'http://192.168.1.10/rewards/';
 
 /*
 |--------------------------------------------------------------------------

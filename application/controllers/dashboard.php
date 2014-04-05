@@ -135,27 +135,30 @@ class Dashboard extends CI_Controller {
 			$this->load->view('template/template', $data);
 		} else {
 			// File Upload
-			$photo['file_name'] = '';
-			if(!empty($_FILES['photo']['name'])) {
-				$config = array();
-				$config['upload_path'] = './uploads/outlets/'; // where the files are uploaded to
-	            $config['allowed_types'] = 'gif|jpg|png';
-	            $config['max_size'] = '1000';
-	            $config['max_width'] = '2000';
-	            $config['max_height'] = '1000';
-	            $config['max_filename'] = '100';
+			if(isset($photo)) {
+				$photo['file_name'] = '';
+				if(!empty($_FILES['photo']['name'])) {
+					$config = array();
+					$config['upload_path'] = './uploads/outlets/'; // where the files are uploaded to
+		            $config['allowed_types'] = 'gif|jpg|png';
+		            $config['max_size'] = '1000';
+		            $config['max_width'] = '2000';
+		            $config['max_height'] = '1000';
+		            $config['max_filename'] = '100';
 
-	            $this->load->library('upload', $config);
+		            $this->load->library('upload', $config);
 	            
-				if($this->upload->do_upload('photo')) {
-					// remove old photo
-					$outlet = $this->outlet_model->getOutlet($this->input->post('outlet_id'));
-					$old_photo = './uploads/outlets/'.$outlet->image;
-					unlink($old_photo);
-					$photo = $this->upload->data();
-				} else {
-					// file upload failed
-					$this->session->set_flashdata('error', 'There was an error with the file upload'. $this->upload->display_errors());
+					if($this->upload->do_upload('photo')) {
+						// remove old photo
+						$outlet = $this->outlet_model->getOutlet($this->input->post('outlet_id'));
+						$old_photo = './uploads/outlets/'.$outlet->image;
+						unlink($old_photo);
+						$photo = $this->upload->data();
+						$data['image'] = $photo['file_name'];
+					} else {
+						// file upload failed
+						$this->session->set_flashdata('error', 'There was an error with the file upload'. $this->upload->display_errors());
+					}
 				}
 			}
 
@@ -172,8 +175,7 @@ class Dashboard extends CI_Controller {
 				'email' => $this->input->post('email'),
 				'website' => $website,
 				'twitter' => $this->input->post('twitter'),
-				'facebook' => $this->input->post('facebook'),
-				'image' => $photo['file_name']
+				'facebook' => $this->input->post('facebook')
 				);
 			$this->outlet_model->updateOutlet($this->input->post('outlet_id'), $data);
 
@@ -343,9 +345,9 @@ class Dashboard extends CI_Controller {
 	{
 		$this->form_validation->set_rules('title', 'Offer Title', 'required');
 		$this->form_validation->set_rules('start_date', 'Start Date', 'required');
-		$this->form_validation->set_rules('expiry_date', 'Expiry Date', 'required');
-		$this->form_validation->set_rules('original_price', 'Original Price', 'required');
-		$this->form_validation->set_rules('offer_price', 'Offer Price', 'required');
+		$this->form_validation->set_rules('expiry_date', 'Expiry Date', 'required|callback_is_expired');
+		$this->form_validation->set_rules('original_price', 'Original Price', 'required|numeric');
+		$this->form_validation->set_rules('offer_price', 'Offer Price', 'required|numeric');
 		$this->form_validation->set_rules('terms', 'Terms and Conditions', 'required');
 		
 		if($this->form_validation->run() == false) {
@@ -381,8 +383,8 @@ class Dashboard extends CI_Controller {
 				'business_id' => $this->session->userdata('business_id'),
 				'outlet_id' => $outlet->id,
 				'title' => $this->input->post('title'),
-				'start_date' => date("Y-m-d", strtotime($this->input->post('start_date'))),
-				'expiry_date' => date("Y-m-d", strtotime($this->input->post('expiry_date'))),
+				'start_date' => date("Y-m-d", strtotime(str_replace("/", "-", $this->input->post('start_date')) )),
+				'expiry_date' => date("Y-m-d", strtotime(str_replace("/", "-", $this->input->post('expiry_date')) )),
 				'original_price' => $this->input->post('original_price'),
 				'offer_price' => $this->input->post('offer_price'),
 				'terms' => $this->input->post('terms'),
@@ -392,6 +394,94 @@ class Dashboard extends CI_Controller {
 			$this->reward_model->saveOffer($data);
 
 			$this->session->set_flashdata('success', 'Your offer has been saved');
+			redirect('dashboard/special_offers');
+		}
+	}
+	
+	public function update_offer()
+	{
+		$this->form_validation->set_rules('o_title', 'Offer Title', 'required');
+		$this->form_validation->set_rules('o_start_date', 'Start Date', 'required');
+		$this->form_validation->set_rules('o_expiry_date', 'Expiry Date', 'required|callback_is_expired');
+		$this->form_validation->set_rules('o_original_price', 'Original Price', 'required|numeric');
+		$this->form_validation->set_rules('o_offer_price', 'Offer Price', 'required|numeric');
+		$this->form_validation->set_rules('o_terms', 'Terms and Conditions', 'required');
+		
+		if($this->form_validation->run() == false) {
+			$data['offers'] = $this->reward_model->getOffers();
+			$data['slider_title'] = "Your Special Offers";
+			$data['slider'] = 'template/blank-slider';
+			$data['main'] = 'dashboard/special_offers';
+			$this->load->view('template/template', $data);
+		} else {
+			// File Upload
+			if(isset($_FILES['photo'])) {
+				$photo['file_name'] = '';
+				if(!empty($_FILES['photo']['name'])) {
+					$config = array();
+					$config['upload_path'] = './uploads/offers/'; // where the files are uploaded to
+		            $config['allowed_types'] = 'gif|jpg|png';
+		            $config['max_size'] = '1000';
+		            $config['max_width'] = '2000';
+		            $config['max_height'] = '1000';
+		            $config['max_filename'] = '100';
+
+		            $this->load->library('upload', $config);
+	            
+					if($this->upload->do_upload('photo')) {
+						$photo = $this->upload->data();
+					} else {
+						// file upload failed
+						$this->session->set_flashdata('error', 'There was an error with the file upload'. $this->upload->display_errors());
+					}
+				}
+				$outlet = $this->outlet_model->getFirstOutlet();
+
+				if($photo['file_name']) {
+					// remove old image and set new image
+					$offer = $this->reward_model->getOffer($this->input->post('oid'));
+					unlink('./uploads/offers/'.$offer['image']);
+					$data['image'] = $photo['file_name'];
+				}
+				
+			}
+
+			$data = array(
+				'title' => $this->input->post('o_title'),
+				'start_date' => date("Y-m-d", strtotime(str_replace("/", "-", $this->input->post('o_start_date')) )),
+				'expiry_date' => date("Y-m-d", strtotime(str_replace("/", "-", $this->input->post('o_expiry_date')) )),
+				'original_price' => $this->input->post('o_original_price'),
+				'offer_price' => $this->input->post('o_offer_price'),
+				'terms' => $this->input->post('o_terms')
+				);
+			$this->reward_model->updateOffer($this->input->post('oid'), $data);
+			$this->session->set_flashdata('success', 'Your offer has been updated');
+			redirect('dashboard/special_offers');
+		}
+	}
+	
+	public function delete_offer()
+	{
+		$oid = $this->uri->segment(3);
+		
+		if($this->reward_model->deleteOffer($oid)) {
+			$this->session->set_flashdata('success', 'The offer has been deleted. If users have added this offer to their profile, it will still be available to them, but will expire on its original expiration date.');
+			redirect('dashboard/special_offers');
+		} else {
+			$this->session->set_flashdata('error', 'The offer could not be deleted.');
+			redirect('dashboard/special_offers');
+		}
+	}
+	
+	public function expire_offer()
+	{
+		$oid = $this->uri->segment(3);
+		
+		if($this->reward_model->expireOffer($oid)) {
+			$this->session->set_flashdata('success', 'The offer has been expired. If users have added this offer to their profile, it will still be available to them, but will expire on its original expiration date.');
+			redirect('dashboard/special_offers');
+		} else {
+			$this->session->set_flashdata('error', 'The offer could not be set to expired.');
 			redirect('dashboard/special_offers');
 		}
 	}
@@ -578,6 +668,19 @@ class Dashboard extends CI_Controller {
 		// Initialize GoCardless
 		GoCardless::set_account_details($account_details);
 		//https://sandbox.gocardless.com/merchants/0JJNJY6F0N/confirm_resource
+	}
+	
+	function is_expired($str)
+	{
+		# check if date entered is before today
+		$now = time();
+		$dte = strtotime(str_replace("/", "-", $str));
+		if($dte < $now ) {
+			$this->form_validation->set_message('is_expired', 'The date needs to be in the future.');
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 

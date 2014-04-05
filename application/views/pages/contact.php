@@ -31,6 +31,7 @@
 							<p><?php echo $this->lang->line('site_contact_email'); ?></p>
 						</address>
 					</div>
+					
 				</section>
 				<!--==========-->
 
